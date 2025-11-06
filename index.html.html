@@ -1,0 +1,2840 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>LISTA DE PREÇO MANTECORP</title>
+<meta content="#0a64ff" name="theme-color"/>
+<style>
+/* ============ Design Tokens ============ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --brand: #0a64ff;
+  --brand-700:#084fc9;
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --text:#0e1726;
+  --muted:#51607a;
+  --border:#e6ecf5;
+  --chip:#eef4ff;
+  --shadow: 0 10px 30px rgba(8, 54, 124, .10);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --card:#0f172a;
+    --text:#e4ecff;
+    --muted:#9db0d1;
+    --border:#1f2a44;
+    --chip:#0e1a33;
+    --shadow: 0 12px 28px rgba(0,0,0,.35);
+  }
+}
+html, body { height: 100%; }
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  background: var(--bg); color: var(--text); line-height: 1.5;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.container { max-width: 1000px; margin: 0 auto; padding: 16px; }
+
+/* ============ Header ============ */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, transparent) 0%, color-mix(in oklab, var(--card) 80%, transparent) 100%);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner { display: grid; gap: 12px; grid-template-columns: 1fr; padding: 12px 16px 10px; }
+.brand-row { display:flex; align-items:center; justify-content: space-between; gap: 10px; }
+.logo {
+  display:flex; align-items:center; gap:10px; font-weight: 900; letter-spacing: -0.02em;
+  font-size: 19px;
+}
+.badge {
+  padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--chip);
+  font-size: 12px; color: var(--muted);
+}
+.subtitle { font-size: 12px; color: var(--muted); }
+
+/* Search */
+.search-wrap { position: relative; }
+.search {
+  width: 100%; height: 48px; border-radius: var(--radius-lg);
+  border: 1px solid var(--border); background: var(--card);
+  padding: 10px 44px; font-size: 15px;
+}
+.search:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand) 20%, transparent); }
+.icon { position:absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; opacity: .6; color: var(--muted); }
+.clear-btn { position:absolute; right: 8px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 13px; color: var(--muted); padding: 6px 10px; border-radius: var(--radius-sm); cursor: pointer; }
+.clear-btn:hover { color: var(--text); background: color-mix(in oklab, var(--chip) 80%, transparent); }
+
+/* Filter Chips */
+.chips { display:flex; flex-wrap: nowrap; overflow-x:auto; gap: 8px; padding: 2px 1px 6px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto;
+  border: 1px solid var(--border); background: var(--card);
+  padding: 8px 12px; border-radius: 999px; font-size: 12px; color: var(--muted);
+  cursor: pointer; transition: transform .06s ease;
+}
+.chip.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+.chip:active { transform: translateY(1px); }
+
+/* Discount Bars */
+.discounts { display: grid; gap: 8px; }
+.discount-bar {
+  display:flex; align-items: center; gap: 10px;
+  border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 10px; background: var(--chip);
+}
+.disc-label { font-size: 12px; font-weight: 800; color: var(--brand); letter-spacing: .04em; }
+.disc-controls { display:flex; align-items:center; gap: 8px; margin-left: auto; }
+.btn {
+  width: 38px; height: 38px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--card); cursor: pointer; font-size: 18px;
+}
+.btn:active { transform: translateY(1px); }
+.disc-value { min-width: 60px; text-align: center; font-weight: 900; }
+
+/* ============ Grid & Card ============ */
+.grid { display: grid; gap: 12px; grid-template-columns: 1fr; padding: 14px 4px 90px 4px; }
+@media (min-width: 560px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow); padding: 14px; display:flex; flex-direction: column; gap: 10px;
+}
+.card-head { display:flex; align-items: center; justify-content: space-between; gap: 8px; }
+.prod { font-size: 16px; font-weight: 800; letter-spacing: -.02em; }
+.apres { font-size: 13px; color: var(--muted); }
+.info-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.info-tag { 
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; padding: 4px 8px; border-radius: 6px;
+  background: var(--chip); color: var(--muted); font-weight: 600;
+}
+.info-tag.posologia { background: color-mix(in oklab, var(--brand) 15%, var(--chip)); color: var(--brand); }
+.info-tag.idade { background: color-mix(in oklab, #22c55e 15%, var(--chip)); color: #16a34a; }
+
+.prices {
+  margin-top: 4px; display:grid; grid-template-columns: 1fr 1px 1fr; align-items: stretch;
+  border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden;
+}
+.divider { width: 1px; background: var(--border); }
+.price { display:flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; }
+.price .left { display:flex; flex-direction: column; gap: 4px; }
+.price .label { font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.price .orig { font-size: 11px; color: var(--muted); text-decoration: line-through; }
+.price .value { font-size: 15px; font-weight: 900; }
+
+/* Empty State */
+.empty { display:none; text-align:center; color: var(--muted); padding: 40px 8px; }
+
+/* Footer spacer to avoid overlap with toolbar */
+.footer-space { height: 88px; }
+
+/* ============ Bottom Toolbar (Mobile) ============ */
+.toolbar {
+  position: fixed; inset: auto 10px 10px 10px; z-index: 60;
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  box-shadow: var(--shadow); padding: 8px; display:flex; gap: 10px; align-items:center; justify-content: space-between;
+}
+.toolbar .t-btn {
+  flex: 1 1 auto; height: 44px; border-radius: 12px; border: 1px solid var(--border); background: var(--chip);
+  display:flex; align-items:center; justify-content:center; gap:8px; font-size: 14px; color: var(--text); cursor:pointer;
+}
+.toolbar .t-btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+.toolbar .t-btn:active { transform: translateY(1px); }
+
+/* ============ Utility ============ */
+.hidden { display:none !important; }
+.highlight { outline: 3px solid color-mix(in oklab, var(--brand) 35%, transparent); outline-offset: 2px; border-radius: 14px; }
+.kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono"; font-size: 12px; border: 1px solid var(--border); background: var(--chip); padding: 2px 6px; border-radius: 6px; color: var(--muted); }
+
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+
+/* === Paletas de Tema === */
+html[data-theme="laranja"]{
+  --brand:#ff7a1a; --brand-700:#c65e0f;
+  --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#536177; --border:#e7edf5; --chip:#fff3e8;
+}
+html[data-theme="azul"]{
+  --brand:#0a64ff; --brand-700:#084fc9;
+  --bg:#f6f8fb; --card:#ffffff; --text:#0e1726; --muted:#51607a; --border:#e6ecf5; --chip:#eef4ff;
+}
+html[data-theme="verde"]{
+  --brand:#22c55e; --brand-700:#16a34a;
+  --bg:#f5fbf7; --card:#ffffff; --text:#0e1726; --muted:#4e6a58; --border:#e3efe7; --chip:#eaf9f0;
+}
+html[data-theme="branco"]{
+  --brand:#111827; --brand-700:#0b1220;
+  --bg:#ffffff; --card:#ffffff; --text:#0b1220; --muted:#6b7280; --border:#e5e7eb; --chip:#f3f4f6;
+}
+html[data-theme="preto"]{
+  --brand:#ff7a1a; /* destaque no escuro */
+  --bg:#0b0e14; --card:#0f141c; --text:#e5ecff; --muted:#9fb3d1; --border:#1a2333; --chip:#0e1a2a;
+}
+/* aparências dos chips de tema (cores sólidas) */
+#themeChips .chip{ border:none; color:#fff; font-weight:700; } .brand-row + #themeChips, #themeChips{ margin-top:4px; }
+#themeChips .chip[data-theme="laranja"]{ background:#ff7a1a; }
+#themeChips .chip[data-theme="azul"]{ background:#0a64ff; }
+#themeChips .chip[data-theme="verde"]{ background:#22c55e; }
+#themeChips .chip[data-theme="branco"]{ background:#ffffff; color:#111; border:1px solid var(--border); }
+#themeChips .chip[data-theme="preto"]{ background:#0b0e14; }
+#themeChips .chip.active{ outline:2px solid color-mix(in oklab, #ffffff 30%, var(--brand) 70%); }
+
+
+/* ==== Acentos visuais baseados em --brand para evidenciar a troca de tema ==== */
+.header::before{
+  content:""; display:block; height:4px; background: var(--brand);
+}
+.badge { background: color-mix(in oklab, var(--brand) 75%, #fff 25%); color:#fff; border-color: transparent; }
+.chip.active { background: var(--brand); color:#fff; border-color: var(--brand); }
+.btn { border-color: color-mix(in oklab, var(--brand) 35%, var(--border)); }
+.btn:hover { box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 20%, transparent); }
+.toolbar { border-color: color-mix(in oklab, var(--brand) 30%, var(--border)); }
+.price .label { color: color-mix(in oklab, var(--brand) 40%, var(--muted)); }
+.search:focus { border-color: var(--brand); box-shadow: 0 0 0 5px color-mix(in oklab, var(--brand) 20%, transparent); }
+
+</style>
+</head>
+<body>
+<header class="header" role="banner">
+<div class="header-inner">
+<div class="brand-row">
+<div class="logo">
+<svg aria-hidden="true" fill="none" height="22" viewbox="0 0 24 24" width="22">
+<path d="M3 12a9 9 0 1018 0 9 9 0 10-18 0Z" stroke="currentColor" stroke-width="2"></path>
+<path d="M8 12l3 3 5-6" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+<span>LISTA DE PREÇO MANTECORP</span>
+</div>
+<span class="badge" id="updatedAt">Atualizado agora</span>
+</div>
+<p class="subtitle">Catálogo otimizado para mobile · modo claro/escuro · filtros rápidos · <span class="kbd" id="counter">0/0 itens</span></p>
+<div class="search-wrap">
+<svg aria-hidden="true" class="icon" fill="none" viewbox="0 0 24 24">
+<path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+<input autocomplete="off" class="search" id="search" inputmode="search" placeholder="Buscar por produto ou apresentação..."/>
+<button class="clear-btn" id="clearBtn" type="button">Limpar</button>
+</div>
+<div aria-label="Filtros rápidos" class="chips" id="chips"></div>
+<div aria-label="Cores do tema" class="chips" id="themeChips"><button class="chip" data-theme="laranja">Laranja</button><button class="chip" data-theme="azul">Azul</button><button class="chip" data-theme="verde">Verde</button><button class="chip" data-theme="branco">Branco</button><button class="chip" data-theme="preto">Preto</button></div>
+<div aria-label="Simulador de descontos" class="discounts" role="region">
+<div aria-live="polite" class="discount-bar">
+<span class="disc-label">% de desconto PF (simulação):</span>
+<div class="disc-controls">
+<button aria-label="Diminuir desconto PF" class="btn" id="minusPF" type="button">−</button>
+<div class="disc-value"><span id="discPF">0</span>%</div>
+<button aria-label="Aumentar desconto PF" class="btn" id="plusPF" type="button">+</button>
+</div>
+</div>
+<div aria-live="polite" class="discount-bar">
+<span class="disc-label">% de desconto PMC (simulação):</span>
+<div class="disc-controls">
+<button aria-label="Diminuir desconto PMC" class="btn" id="minusPMC" type="button">−</button>
+<div class="disc-value"><span id="discPMC">0</span>%</div>
+<button aria-label="Aumentar desconto PMC" class="btn" id="plusPMC" type="button">+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="container">
+<!-- IMPORTANTE: cole aqui os <article class="card"> existentes do seu arquivo atual -->
+<section aria-live="polite" class="grid" id="grid">
+<article class="card" data-prod="ALEKTOS">
+<div class="card-head">
+<h3 class="prod">ALEKTOS</h3>
+</div>
+<p class="apres">20mg Comprimidos 20un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="55,61">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 72,10</span>
+</div>
+<span class="value" data-kind="pf">R$ 55,61</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="74,60">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 96,72</span>
+</div>
+<span class="value" data-kind="pmc">R$ 74,60</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALEKTOS">
+<div class="card-head">
+<h3 class="prod">ALEKTOS</h3>
+</div>
+<p class="apres">20mg Comprimidos 30un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="105,89">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 108,27</span>
+</div>
+<span class="value" data-kind="pf">R$ 105,89</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="142,05">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 145,24</span>
+</div>
+<span class="value" data-kind="pmc">R$ 142,05</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALEKTOS DERM">
+<div class="card-head">
+<h3 class="prod">ALEKTOS DERM</h3>
+</div>
+<p class="apres">Loção Hidratante 200mL</p>
+<div class="info-tags">
+<span class="info-tag idade">👤 A partir do 7º dia de vida</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="81,81">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">—</span>
+</div>
+<span class="value" data-kind="pf">R$ 81,81</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="109,29">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 109,29</span>
+</div>
+<span class="value" data-kind="pmc">R$ 109,29</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALEKTOS DERM">
+<div class="card-head">
+<h3 class="prod">ALEKTOS DERM</h3>
+</div>
+<p class="apres">Loção Hidratante 450mL</p>
+<div class="info-tags">
+<span class="info-tag idade">👤 A partir do 7º dia de vida</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="112,91">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">—</span>
+</div>
+<span class="value" data-kind="pf">R$ 112,91</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="154,71">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 154,71</span>
+</div>
+<span class="value" data-kind="pmc">R$ 154,71</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALEKTOS PED">
+<div class="card-head">
+<h3 class="prod">ALEKTOS PED</h3>
+</div>
+<p class="apres">2,5mg/mL Solução Oral 120mL + Copo</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 10 mg (4 mL) uma vez ao dia</span>
+<span class="info-tag idade">👤 A partir de 6 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="67.62">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 67,62</span>
+</div>
+<span class="value" data-kind="pf">R$ 67,62</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="90.71">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 90,71</span>
+</div>
+<span class="value" data-kind="pmc">R$ 90,71</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALIVIUM">
+<div class="card-head">
+<h3 class="prod">ALIVIUM</h3>
+</div>
+<p class="apres">600mg Cápsula Líquida 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 cápsula, 3 a 4 vezes ao dia (a cada 6-8h)</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="36.05">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,05</span>
+</div>
+<span class="value" data-kind="pf">R$ 36,05</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="49.84">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 49,84</span>
+</div>
+<span class="value" data-kind="pmc">R$ 49,84</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALIVIUM">
+<div class="card-head">
+<h3 class="prod">ALIVIUM</h3>
+</div>
+<p class="apres">Infantil 100mg/mL Suspensão 20mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 gota/kg/dose, 3 a 4x ao dia</span>
+<span class="info-tag idade">👤 A partir de 6 meses</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="36.83">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,83</span>
+</div>
+<span class="value" data-kind="pf">R$ 36,83</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="49.41">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 49,41</span>
+</div>
+<span class="value" data-kind="pmc">R$ 49,41</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALIVIUM">
+<div class="card-head">
+<h3 class="prod">ALIVIUM</h3>
+</div>
+<p class="apres">GC 200mg/mL Gotas 20mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 gota/kg/dose, 3 a 4x ao dia</span>
+<span class="info-tag idade">👤 A partir de 6 meses</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="45,13">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 67,72</span>
+</div>
+<span class="value" data-kind="pf">R$ 45,13</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="62,39">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 93,62</span>
+</div>
+<span class="value" data-kind="pmc">R$ 62,39</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALIVIUM">
+<div class="card-head">
+<h3 class="prod">ALIVIUM</h3>
+</div>
+<p class="apres">400mg Cápsula Líquida 8un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 cápsula, a cada 6 a 8 horas</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="19.46">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 19,46</span>
+</div>
+<span class="value" data-kind="pf">R$ 19,46</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="26.1">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 26,10</span>
+</div>
+<span class="value" data-kind="pmc">R$ 26,10</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALIVIUM">
+<div class="card-head">
+<h3 class="prod">ALIVIUM</h3>
+</div>
+<p class="apres">400mg Cápsula Líquida 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 cápsula, a cada 6 a 8 horas</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="23.63">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 23,63</span>
+</div>
+<span class="value" data-kind="pf">R$ 23,63</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="31.7">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 31,70</span>
+</div>
+<span class="value" data-kind="pmc">R$ 31,70</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ALIVIUM">
+<div class="card-head">
+<h3 class="prod">ALIVIUM</h3>
+</div>
+<p class="apres">400mg Cápsula Líquida 20un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 cápsula, a cada 6 a 8 horas</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="43.15">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 43,15</span>
+</div>
+<span class="value" data-kind="pf">R$ 43,15</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="57.88">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 57,88</span>
+</div>
+<span class="value" data-kind="pmc">R$ 57,88</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="AMMY">
+<div class="card-head">
+<h3 class="prod">AMMY</h3>
+</div>
+<p class="apres">4mg Comprimidos 28un (24+4)</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 24 dias de pílulas ativas seguidas, por 4 dias de pílulas inativas</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="97.51">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 97,51</span>
+</div>
+<span class="value" data-kind="pf">R$ 97,51</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="130.81">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 130,81</span>
+</div>
+<span class="value" data-kind="pmc">R$ 130,81</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="AMOME">
+<div class="card-head">
+<h3 class="prod">AMOME</h3>
+</div>
+<p class="apres">50mcg Spray 60 Acionamentos</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2 jatos em cada narina, 1x ao dia</span>
+<span class="info-tag idade">👤 A partir de 2 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="37,56">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 48,80</span>
+</div>
+<span class="value" data-kind="pf">R$ 37,56</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="51,92">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 67,46</span>
+</div>
+<span class="value" data-kind="pmc">R$ 51,92</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="AMOME">
+<div class="card-head">
+<h3 class="prod">AMOME</h3>
+</div>
+<p class="apres">50mcg Spray 120 Acionamentos</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2 jatos em cada narina, 1x ao dia</span>
+<span class="info-tag idade">👤 A partir de 2 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="52,32">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 92,66</span>
+</div>
+<span class="value" data-kind="pf">R$ 52,32</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="72,33">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 128,10</span>
+</div>
+<span class="value" data-kind="pmc">R$ 72,33</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="CELESTAMINE">
+<div class="card-head">
+<h3 class="prod">CELESTAMINE</h3>
+</div>
+<p class="apres">Xarope 120mL + Copo Dosador</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Criança: 1,25 a 2,5 mL, 3x ao dia | Adulto: 2,5 mL, 3x ao dia</span>
+<span class="info-tag idade">👤 A partir de 2 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="52.63">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 52,63</span>
+</div>
+<span class="value" data-kind="pf">R$ 52,63</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="70.6">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 70,60</span>
+</div>
+<span class="value" data-kind="pmc">R$ 70,60</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="CELESTAMINE">
+<div class="card-head">
+<h3 class="prod">CELESTAMINE</h3>
+</div>
+<p class="apres">Gotas 20mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Criança: 12 gotas 3x ao dia | Adulto: 24 a 48 gotas 3x ao dia</span>
+<span class="info-tag idade">👤 A partir de 2 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="43.87">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 43,87</span>
+</div>
+<span class="value" data-kind="pf">R$ 43,87</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="58.85">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 58,85</span>
+</div>
+<span class="value" data-kind="pmc">R$ 58,85</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DESCON">
+<div class="card-head">
+<h3 class="prod">DESCON</h3>
+</div>
+<p class="apres">Gotas 20mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2 gotas/kg/dia (dividido em 3 doses)</span>
+<span class="info-tag idade">👤 A partir de 2 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="11.0">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 11,00</span>
+</div>
+<span class="value" data-kind="pf">R$ 11,00</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="14.76">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 14,76</span>
+</div>
+<span class="value" data-kind="pmc">R$ 14,76</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DESCON">
+<div class="card-head">
+<h3 class="prod">DESCON</h3>
+</div>
+<p class="apres">Xarope 120mL + Copo Dosador</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Crianças: 2,5-5 mL 4x/dia | Adultos: 10-15 mL 3-4x/dia</span>
+<span class="info-tag idade">👤 A partir de 2 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="16.2">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 16,20</span>
+</div>
+<span class="value" data-kind="pf">R$ 16,20</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="21.73">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 21,73</span>
+</div>
+<span class="value" data-kind="pmc">R$ 21,73</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DESCON">
+<div class="card-head">
+<h3 class="prod">DESCON</h3>
+</div>
+<p class="apres">Comprimidos 12un (Liberação Prolongada)</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido a cada 12 horas</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="20.37">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 20,37</span>
+</div>
+<span class="value" data-kind="pf">R$ 20,37</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="27.33">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 27,33</span>
+</div>
+<span class="value" data-kind="pmc">R$ 27,33</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DIPROSPAN">
+<div class="card-head">
+<h3 class="prod">DIPROSPAN</h3>
+</div>
+<p class="apres">1mL Ampola + Seringa</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Dose conforme indicação médica</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="36.6">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,60</span>
+</div>
+<span class="value" data-kind="pf">R$ 36,60</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="50.6">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 50,60</span>
+</div>
+<span class="value" data-kind="pmc">R$ 50,60</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DIPROSPAN">
+<div class="card-head">
+<h3 class="prod">DIPROSPAN</h3>
+</div>
+<p class="apres">1mL Seringa Preenchida Hypak</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Dose conforme indicação médica</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="42.22">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 42,22</span>
+</div>
+<span class="value" data-kind="pf">R$ 42,22</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="58.37">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 58,37</span>
+</div>
+<span class="value" data-kind="pmc">R$ 58,37</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DIPROSPAN">
+<div class="card-head">
+<h3 class="prod">DIPROSPAN</h3>
+</div>
+<p class="apres">1mL Caixa com 6 Ampolas</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Dose conforme indicação médica</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="180,33">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 236,43</span>
+</div>
+<span class="value" data-kind="pf">R$ 180,33</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="249,30">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 326,85</span>
+</div>
+<span class="value" data-kind="pmc">R$ 249,30</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DRAMIN">
+<div class="card-head">
+<h3 class="prod">DRAMIN</h3>
+</div>
+<p class="apres">25mg Cápsula Mole 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 a 2 cápsulas a cada 6-8 horas</span>
+<span class="info-tag idade">👤 A partir de 6 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="27.48">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 27,48</span>
+</div>
+<span class="value" data-kind="pf">R$ 27,48</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="36.86">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,86</span>
+</div>
+<span class="value" data-kind="pmc">R$ 36,86</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DRAMIN">
+<div class="card-head">
+<h3 class="prod">DRAMIN</h3>
+</div>
+<p class="apres">50mg Cápsula Mole 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 a 2 cápsulas a cada 4-6 horas (máx 4/dia)</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="47.77">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 47,77</span>
+</div>
+<span class="value" data-kind="pf">R$ 47,77</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="64.08">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 64,08</span>
+</div>
+<span class="value" data-kind="pmc">R$ 64,08</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DRAMIN B6">
+<div class="card-head">
+<h3 class="prod">DRAMIN B6</h3>
+</div>
+<p class="apres">Comprimido Revestido 30un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 a 2 comprimidos a cada 4 horas (máx 8/dia)</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="19.02">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 19,02</span>
+</div>
+<span class="value" data-kind="pf">R$ 19,02</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="25.51">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 25,51</span>
+</div>
+<span class="value" data-kind="pmc">R$ 25,51</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="DRAMIN B6">
+<div class="card-head">
+<h3 class="prod">DRAMIN B6</h3>
+</div>
+<p class="apres">Gotas 30mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 gota/kg a cada 6-8 horas (máx 60 gotas/dia)</span>
+<span class="info-tag idade">👤 A partir de 2 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="18.15">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 18,15</span>
+</div>
+<span class="value" data-kind="pf">R$ 18,15</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="24.35">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 24,35</span>
+</div>
+<span class="value" data-kind="pmc">R$ 24,35</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ECOXE">
+<div class="card-head">
+<h3 class="prod">ECOXE</h3>
+</div>
+<p class="apres">60mg Comprimidos 7un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 18 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="48,83">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 55,51</span>
+</div>
+<span class="value" data-kind="pf">R$ 48,83</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="67,50">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 76,74</span>
+</div>
+<span class="value" data-kind="pmc">R$ 67,50</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ECOXE">
+<div class="card-head">
+<h3 class="prod">ECOXE</h3>
+</div>
+<p class="apres">60mg Comprimidos 14un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 18 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="97,35">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 111,04</span>
+</div>
+<span class="value" data-kind="pf">R$ 97,35</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="134,58">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 153,51</span>
+</div>
+<span class="value" data-kind="pmc">R$ 134,58</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ECOXE">
+<div class="card-head">
+<h3 class="prod">ECOXE</h3>
+</div>
+<p class="apres">90mg Comprimidos 7un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 18 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="54,83">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 61,98</span>
+</div>
+<span class="value" data-kind="pf">R$ 54,83</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="75,80">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 85,68</span>
+</div>
+<span class="value" data-kind="pmc">R$ 75,80</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ECOXE">
+<div class="card-head">
+<h3 class="prod">ECOXE</h3>
+</div>
+<p class="apres">90mg Comprimidos 14un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 18 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="108,51">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 123,96</span>
+</div>
+<span class="value" data-kind="pf">R$ 108,51</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="150,01">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 171,37</span>
+</div>
+<span class="value" data-kind="pmc">R$ 150,01</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ESOL XR">
+<div class="card-head">
+<h3 class="prod">ESOL XR</h3>
+</div>
+<p class="apres">20mg Cápsulas Duras 28un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 18 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="55,21">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 130,68</span>
+</div>
+<span class="value" data-kind="pf">R$ 55,21</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="76,32">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 180,66</span>
+</div>
+<span class="value" data-kind="pmc">R$ 76,32</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ESOL XR">
+<div class="card-head">
+<h3 class="prod">ESOL XR</h3>
+</div>
+<p class="apres">40mg Cápsulas Duras 28un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 18 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="110,46">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 273,99</span>
+</div>
+<span class="value" data-kind="pf">R$ 110,46</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="152,70">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 378,78</span>
+</div>
+<span class="value" data-kind="pmc">R$ 152,70</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="KELAC">
+<div class="card-head">
+<h3 class="prod">KELAC</h3>
+</div>
+<p class="apres">10mg Comprimidos 4un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido a cada 6-8h</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="15.38">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 15,38</span>
+</div>
+<span class="value" data-kind="pf">R$ 15,38</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="21.26">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 21,26</span>
+</div>
+<span class="value" data-kind="pmc">R$ 21,26</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="KELAC">
+<div class="card-head">
+<h3 class="prod">KELAC</h3>
+</div>
+<p class="apres">10mg Comprimidos 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido a cada 6-8h</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="26,54">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 38,41</span>
+</div>
+<span class="value" data-kind="pf">R$ 26,54</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="36,69">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 53,10</span>
+</div>
+<span class="value" data-kind="pmc">R$ 36,69</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="KELAC">
+<div class="card-head">
+<h3 class="prod">KELAC</h3>
+</div>
+<p class="apres">10mg Comprimidos 20un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido a cada 6h ou 8h</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="36,67">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 76,82</span>
+</div>
+<span class="value" data-kind="pf">R$ 36,67</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="50,69">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 106,20</span>
+</div>
+<span class="value" data-kind="pmc">R$ 50,69</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="LISADOR">
+<div class="card-head">
+<h3 class="prod">LISADOR</h3>
+</div>
+<p class="apres">Comprimidos 16un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Criança: 1 cpr 6 em 6h | Adultos: 1 a 2 cpr 6 em 6h</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="35.46">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 35,46</span>
+</div>
+<span class="value" data-kind="pf">R$ 35,46</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="47.57">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 47,57</span>
+</div>
+<span class="value" data-kind="pmc">R$ 47,57</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="LISADOR">
+<div class="card-head">
+<h3 class="prod">LISADOR</h3>
+</div>
+<p class="apres">Comprimidos 24un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Criança: 1 cpr 6 em 6h | Adultos: 1 a 2 cpr 6 em 6h</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="47.89">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 47,89</span>
+</div>
+<span class="value" data-kind="pf">R$ 47,89</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="64.24">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 64,24</span>
+</div>
+<span class="value" data-kind="pmc">R$ 64,24</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="LISADOR CÓLICA">
+<div class="card-head">
+<h3 class="prod">LISADOR CÓLICA</h3>
+</div>
+<p class="apres">Comprimidos 20un</p>
+<div class="prices">
+<div class="price pf" data-pf="19.85">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 19,85</span>
+</div>
+<span class="value" data-kind="pf">R$ 19,85</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="26.63">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 26,63</span>
+</div>
+<span class="value" data-kind="pmc">R$ 26,63</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="LISADOR DIP">
+<div class="card-head">
+<h3 class="prod">LISADOR DIP</h3>
+</div>
+<p class="apres">1g Comprimidos 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: ½ a 1 cpr até 4x ao dia</span>
+<span class="info-tag idade">👤 A partir de 15 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="18.84">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 18,84</span>
+</div>
+<span class="value" data-kind="pf">R$ 18,84</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="25.27">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 25,27</span>
+</div>
+<span class="value" data-kind="pmc">R$ 25,27</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="LISADOR DIP">
+<div class="card-head">
+<h3 class="prod">LISADOR DIP</h3>
+</div>
+<p class="apres">Gotas 20mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 20 a 40 gotas até 4x ao dia (40 gotas = 1g de dipirona)</span>
+<span class="info-tag idade">👤 A partir de 15 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="21.09">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 21,09</span>
+</div>
+<span class="value" data-kind="pf">R$ 21,09</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="28.29">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 28,29</span>
+</div>
+<span class="value" data-kind="pmc">R$ 28,29</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="LISADOR MUSCULAR">
+<div class="card-head">
+<h3 class="prod">LISADOR MUSCULAR</h3>
+</div>
+<p class="apres">Comprimidos 4un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 cpr 3 a 4x ao dia</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="5.98">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 5,98</span>
+</div>
+<span class="value" data-kind="pf">R$ 5,98</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="8.02">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 8,02</span>
+</div>
+<span class="value" data-kind="pmc">R$ 8,02</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="LISADOR MUSCULAR">
+<div class="card-head">
+<h3 class="prod">LISADOR MUSCULAR</h3>
+</div>
+<p class="apres">Comprimidos 16un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 cpr 3 a 4x ao dia</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="21.09">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 21,09</span>
+</div>
+<span class="value" data-kind="pf">R$ 21,09</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="28.29">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 28,29</span>
+</div>
+<span class="value" data-kind="pmc">R$ 28,29</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="MAXSULID">
+<div class="card-head">
+<h3 class="prod">MAXSULID</h3>
+</div>
+<p class="apres">400mg Comprimidos 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 cpr 12 em 12h</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="36.9">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,90</span>
+</div>
+<span class="value" data-kind="pf">R$ 36,90</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="51.01">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 51,01</span>
+</div>
+<span class="value" data-kind="pmc">R$ 51,01</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="MAXSULID">
+<div class="card-head">
+<h3 class="prod">MAXSULID</h3>
+</div>
+<p class="apres">400mg Comprimidos 30un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 cpr 12 em 12h</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="88,57">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 110,57</span>
+</div>
+<span class="value" data-kind="pf">R$ 88,57</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="122,44">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 152,86</span>
+</div>
+<span class="value" data-kind="pmc">R$ 122,44</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="NOVOTRAM">
+<div class="card-head">
+<h3 class="prod">NOVOTRAM</h3>
+</div>
+<p class="apres">50mg Cápsula 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 a 2 caps até 4x ao dia</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="47.56">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 47,56</span>
+</div>
+<span class="value" data-kind="pf">R$ 47,56</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="65.75">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 65,75</span>
+</div>
+<span class="value" data-kind="pmc">R$ 65,75</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="NOVOTRAM">
+<div class="card-head">
+<h3 class="prod">NOVOTRAM</h3>
+</div>
+<p class="apres">50mg Cápsula 20un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 a 2 caps até 4x ao dia</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="95.12">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 95,12</span>
+</div>
+<span class="value" data-kind="pf">R$ 95,12</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="131.5">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 131,50</span>
+</div>
+<span class="value" data-kind="pmc">R$ 131,50</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="NOVOTRAM">
+<div class="card-head">
+<h3 class="prod">NOVOTRAM</h3>
+</div>
+<p class="apres">Gotas 100mg/mL 10mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 20 a 40 gotas | Crianças: 4 a 8 gotas por 10 kg</span>
+<span class="info-tag idade">👤 A partir de 1 ano</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="82.78">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 82,78</span>
+</div>
+<span class="value" data-kind="pf">R$ 82,78</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="114.44">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 114,44</span>
+</div>
+<span class="value" data-kind="pmc">R$ 114,44</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="NOVOTRAM PAR">
+<div class="card-head">
+<h3 class="prod">NOVOTRAM PAR</h3>
+</div>
+<p class="apres">37,5mg+325mg Comprimidos 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 a 2 cpr 4 a 6h</span>
+<span class="info-tag idade">👤 a partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="28,16">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 41,09</span>
+</div>
+<span class="value" data-kind="pf">R$ 28,16</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="37,78">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 55,12</span>
+</div>
+<span class="value" data-kind="pmc">R$ 37,78</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="NOVOTRAM PAR">
+<div class="card-head">
+<h3 class="prod">NOVOTRAM PAR</h3>
+</div>
+<p class="apres">37,5mg+325mg Comprimidos 20un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 a 2 cpr 4 a 6h</span>
+<span class="info-tag idade">👤 a partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="49,10">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 82,21</span>
+</div>
+<span class="value" data-kind="pf">R$ 49,10</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="65,87">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 110,28</span>
+</div>
+<span class="value" data-kind="pmc">R$ 65,87</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ONDIF">
+<div class="card-head">
+<h3 class="prod">ONDIF</h3>
+</div>
+<p class="apres">4mg Filme Orodispersível 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 a 2 filmes | Crianças: 1 filme</span>
+<span class="info-tag idade">👤 A partir de 2 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="49.48">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 49,48</span>
+</div>
+<span class="value" data-kind="pf">R$ 49,48</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="66.38">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 66,38</span>
+</div>
+<span class="value" data-kind="pmc">R$ 66,38</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="ONDIF">
+<div class="card-head">
+<h3 class="prod">ONDIF</h3>
+</div>
+<p class="apres">8mg Filme Orodispersível 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Adultos: 1 filme</span>
+<span class="info-tag idade">👤 A partir de 11 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="78.7">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 78,70</span>
+</div>
+<span class="value" data-kind="pf">R$ 78,70</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="105.57">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 105,57</span>
+</div>
+<span class="value" data-kind="pmc">R$ 105,57</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="PRATIUM">
+<div class="card-head">
+<h3 class="prod">PRATIUM</h3>
+</div>
+<p class="apres">140mg/mL Gotas 15mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Criança: 1 gota/kg/dose, 4 a 6h | Adulto: 40 a 70 gotas 4 a 6h</span>
+<span class="info-tag idade">👤 a partir do nascimento</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="28.32">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 28,32</span>
+</div>
+<span class="value" data-kind="pf">R$ 28,32</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="37.99">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 37,99</span>
+</div>
+<span class="value" data-kind="pmc">R$ 37,99</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="PREDSIM">
+<div class="card-head">
+<h3 class="prod">PREDSIM</h3>
+</div>
+<p class="apres">Gotas 11mg/mL 20mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Criança: 2 gota/kg dose 1x ao dia | Adulto: 40 a 70 gotas 4 a 6h</span>
+<span class="info-tag idade">👤 Adulto e Pediátrico</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="33.63">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 33,63</span>
+</div>
+<span class="value" data-kind="pf">R$ 33,63</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="46.49">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 46,49</span>
+</div>
+<span class="value" data-kind="pmc">R$ 46,49</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="PREDSIM">
+<div class="card-head">
+<h3 class="prod">PREDSIM</h3>
+</div>
+<p class="apres">Solução 3mg/mL 100mL + Seringa</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Criança: Peso divido 3 (dose diária). Ex: 18 kg = 6ml dia</span>
+<span class="info-tag idade">👤 Adulto e Pediátrico</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="45,32">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 47,05</span>
+</div>
+<span class="value" data-kind="pf">R$ 45,32</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="62,65">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 65,04</span>
+</div>
+<span class="value" data-kind="pmc">R$ 62,65</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="PREDSIM">
+<div class="card-head">
+<h3 class="prod">PREDSIM</h3>
+</div>
+<p class="apres">Comprimidos 5mg 20un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 5 a 60 mg dia</span>
+<span class="info-tag idade">👤 Adulto e Pediátrico</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="20.09">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 20,09</span>
+</div>
+<span class="value" data-kind="pf">R$ 20,09</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="27.77">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 27,77</span>
+</div>
+<span class="value" data-kind="pmc">R$ 27,77</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="PREDSIM">
+<div class="card-head">
+<h3 class="prod">PREDSIM</h3>
+</div>
+<p class="apres">Comprimidos 10mg 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 5 a 60 mg dia</span>
+<span class="info-tag idade">👤 Adulto e Pediátrico</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="16,23">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 17,74</span>
+</div>
+<span class="value" data-kind="pf">R$ 16,23</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="22,44">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 24,52</span>
+</div>
+<span class="value" data-kind="pmc">R$ 22,44</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="PREDSIM">
+<div class="card-head">
+<h3 class="prod">PREDSIM</h3>
+</div>
+<p class="apres">Comprimidos 20mg 20un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 5 a 60 mg dia</span>
+<span class="info-tag idade">👤 Adulto e Pediátrico</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="56,41">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 58,52</span>
+</div>
+<span class="value" data-kind="pf">R$ 56,41</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="77,98">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 80,90</span>
+</div>
+<span class="value" data-kind="pmc">R$ 77,98</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="PREDSIM">
+<div class="card-head">
+<h3 class="prod">PREDSIM</h3>
+</div>
+<p class="apres">Comprimidos 40mg 10un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 5 a 60 mg dia</span>
+<span class="info-tag idade">👤 Adulto e Pediátrico</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="67,93">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 73,00</span>
+</div>
+<span class="value" data-kind="pf">R$ 67,93</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="93,91">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 100,92</span>
+</div>
+<span class="value" data-kind="pmc">R$ 93,91</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="QUADRIDERM">
+<div class="card-head">
+<h3 class="prod">QUADRIDERM</h3>
+</div>
+<p class="apres">Creme 20g</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2x ao dia (manhã e noite)</span>
+<span class="info-tag idade">👤 Acima de 3 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="45.41">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 45,41</span>
+</div>
+<span class="value" data-kind="pf">R$ 45,41</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="60.92">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 60,92</span>
+</div>
+<span class="value" data-kind="pmc">R$ 60,92</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="QUADRIDERM">
+<div class="card-head">
+<h3 class="prod">QUADRIDERM</h3>
+</div>
+<p class="apres">Pomada 20g</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2x ao dia (manhã e noite)</span>
+<span class="info-tag idade">👤 Acima de 3 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="45.57">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 45,57</span>
+</div>
+<span class="value" data-kind="pf">R$ 45,57</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="61.13">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 61,13</span>
+</div>
+<span class="value" data-kind="pmc">R$ 61,13</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Alto Volume">
+<div class="card-head">
+<h3 class="prod">Rinosoro Alto Volume</h3>
+</div>
+<p class="apres">30 sachês + 1 Frasco aplicador de 250mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2 aplicações ao dia</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="71,29">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 68,79</span>
+</div>
+<span class="value" data-kind="pf">R$ 71,29</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="95,63">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 84,99</span>
+</div>
+<span class="value" data-kind="pmc">R$ 95,63</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Alto Volume Baby">
+<div class="card-head">
+<h3 class="prod">Rinosoro Alto Volume Baby</h3>
+</div>
+<p class="apres">15 sachês + 1 copo dosador de 60mL + 1 Seringa de 20mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2 aplicações ao dia</span>
+<span class="info-tag idade">👤 0 a 3 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="41.94">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 41,94</span>
+</div>
+<span class="value" data-kind="pf">R$ 41,94</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="58.3">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 58,30</span>
+</div>
+<span class="value" data-kind="pmc">R$ 58,30</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Alto Volume Baby">
+<div class="card-head">
+<h3 class="prod">Rinosoro Alto Volume Baby</h3>
+</div>
+<p class="apres">Refil com 15 sachês</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2 aplicações ao dia</span>
+<span class="info-tag idade">👤 0 a 3 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="26.73">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 26,73</span>
+</div>
+<span class="value" data-kind="pf">R$ 26,73</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="37.16">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 37,16</span>
+</div>
+<span class="value" data-kind="pmc">R$ 37,16</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Alto Volume Infantil">
+<div class="card-head">
+<h3 class="prod">Rinosoro Alto Volume Infantil</h3>
+</div>
+<p class="apres">15 sachês + 1 Frasco aplicador de 120mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2 aplicações ao dia</span>
+<span class="info-tag idade">👤 4 a 11 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="39.78">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 39,78</span>
+</div>
+<span class="value" data-kind="pf">R$ 39,78</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="55.3">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 55,30</span>
+</div>
+<span class="value" data-kind="pmc">R$ 55,30</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Alto Volume Infantil">
+<div class="card-head">
+<h3 class="prod">Rinosoro Alto Volume Infantil</h3>
+</div>
+<p class="apres">Refil com 15 sachês</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 2 aplicações ao dia</span>
+<span class="info-tag idade">👤 4 a 11 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="25.09">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 25,09</span>
+</div>
+<span class="value" data-kind="pf">R$ 25,09</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="33.83">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 33,83</span>
+</div>
+<span class="value" data-kind="pmc">R$ 33,83</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Gotas">
+<div class="card-head">
+<h3 class="prod">Rinosoro Gotas</h3>
+</div>
+<p class="apres">30mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="16.28">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 16,28</span>
+</div>
+<span class="value" data-kind="pf">R$ 16,28</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="20.79">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 20,79</span>
+</div>
+<span class="value" data-kind="pmc">R$ 20,79</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro JET">
+<div class="card-head">
+<h3 class="prod">Rinosoro JET</h3>
+</div>
+<p class="apres">Frasco com 100mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="36.07">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,07</span>
+</div>
+<span class="value" data-kind="pf">R$ 36,07</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="40.11">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 40,11</span>
+</div>
+<span class="value" data-kind="pmc">R$ 40,11</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro JET Infantil">
+<div class="card-head">
+<h3 class="prod">Rinosoro JET Infantil</h3>
+</div>
+<p class="apres">Frasco com 100mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="36.07">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,07</span>
+</div>
+<span class="value" data-kind="pf">R$ 36,07</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="50.14">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 50,14</span>
+</div>
+<span class="value" data-kind="pmc">R$ 50,14</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro JET XT Infantil">
+<div class="card-head">
+<h3 class="prod">Rinosoro JET XT Infantil</h3>
+</div>
+<p class="apres">Frasco com 100mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="47.03">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 47,03</span>
+</div>
+<span class="value" data-kind="pf">R$ 47,03</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="57.99">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 57,99</span>
+</div>
+<span class="value" data-kind="pmc">R$ 57,99</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Spray">
+<div class="card-head">
+<h3 class="prod">Rinosoro Spray</h3>
+</div>
+<p class="apres">Spray nasal com 50mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="24.81">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 24,81</span>
+</div>
+<span class="value" data-kind="pf">R$ 24,81</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="29.39">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 29,39</span>
+</div>
+<span class="value" data-kind="pmc">R$ 29,39</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Spray 3%">
+<div class="card-head">
+<h3 class="prod">Rinosoro Spray 3%</h3>
+</div>
+<p class="apres">Spray nasal com 50mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="24.81">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 24,81</span>
+</div>
+<span class="value" data-kind="pf">R$ 24,81</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="29.99">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 29,99</span>
+</div>
+<span class="value" data-kind="pmc">R$ 29,99</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Spray Infantil">
+<div class="card-head">
+<h3 class="prod">Rinosoro Spray Infantil</h3>
+</div>
+<p class="apres">Spray nasal com 50mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="25.55">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 25,55</span>
+</div>
+<span class="value" data-kind="pf">R$ 25,55</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="29.99">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 29,99</span>
+</div>
+<span class="value" data-kind="pmc">R$ 29,99</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Spray XT">
+<div class="card-head">
+<h3 class="prod">Rinosoro Spray XT</h3>
+</div>
+<p class="apres">Spray nasal com 50mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="26.58">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 26,58</span>
+</div>
+<span class="value" data-kind="pf">R$ 26,58</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="36.57">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,57</span>
+</div>
+<span class="value" data-kind="pmc">R$ 36,57</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Spray XT 3%">
+<div class="card-head">
+<h3 class="prod">Rinosoro Spray XT 3%</h3>
+</div>
+<p class="apres">Spray nasal com 50mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="27.68">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 27,68</span>
+</div>
+<span class="value" data-kind="pf">R$ 27,68</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="38.09">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 38,09</span>
+</div>
+<span class="value" data-kind="pmc">R$ 38,09</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro Spray XT Infantil">
+<div class="card-head">
+<h3 class="prod">Rinosoro Spray XT Infantil</h3>
+</div>
+<p class="apres">Spray nasal com 50mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="26.58">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 26,58</span>
+</div>
+<span class="value" data-kind="pf">R$ 26,58</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="36.57">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 36,57</span>
+</div>
+<span class="value" data-kind="pmc">R$ 36,57</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="Rinosoro XT Jet">
+<div class="card-head">
+<h3 class="prod">Rinosoro XT Jet</h3>
+</div>
+<p class="apres">Frasco com 100mL</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 Aplique a solução nas narinas, conforme a necessidade</span>
+<span class="info-tag idade">👤 Crianças e Adultos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="47.03">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 47,03</span>
+</div>
+<span class="value" data-kind="pf">R$ 47,03</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="57.99">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 57,99</span>
+</div>
+<span class="value" data-kind="pmc">R$ 57,99</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="RIZI">
+<div class="card-head">
+<h3 class="prod">RIZI</h3>
+</div>
+<p class="apres">5,0mg 10 Comprimidos Revestidos</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="42.28">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 42,28</span>
+</div>
+<span class="value" data-kind="pf">R$ 42,28</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="56.72">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 56,72</span>
+</div>
+<span class="value" data-kind="pmc">R$ 56,72</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="RIZI">
+<div class="card-head">
+<h3 class="prod">RIZI</h3>
+</div>
+<p class="apres">5,0mg 30 Comprimidos Revestidos</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia</span>
+<span class="info-tag idade">👤 A partir de 12 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="126.9">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 126,90</span>
+</div>
+<span class="value" data-kind="pf">R$ 126,90</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="170.23">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 170,23</span>
+</div>
+<span class="value" data-kind="pmc">R$ 170,23</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="RIZI-M">
+<div class="card-head">
+<h3 class="prod">RIZI-M</h3>
+</div>
+<p class="apres">10mg+5mg Comprimidos 7un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia (noite)</span>
+<span class="info-tag idade">👤 A partir de 18 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="54.44">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 54,44</span>
+</div>
+<span class="value" data-kind="pf">R$ 54,44</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="73.03">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 73,03</span>
+</div>
+<span class="value" data-kind="pmc">R$ 73,03</span>
+</div>
+</div>
+</article>
+<article class="card" data-prod="RIZI-M">
+<div class="card-head">
+<h3 class="prod">RIZI-M</h3>
+</div>
+<p class="apres">10mg+5mg Comprimidos 14un</p>
+<div class="info-tags">
+<span class="info-tag posologia">💊 1 comprimido ao dia (noite)</span>
+<span class="info-tag idade">👤 A partir de 18 anos</span>
+</div>
+<div class="prices">
+<div class="price pf" data-pf="108.91">
+<div class="left">
+<span class="label">PF 18%</span>
+<span aria-label="preço original" class="orig">R$ 108,91</span>
+</div>
+<span class="value" data-kind="pf">R$ 108,91</span>
+</div>
+<div class="divider"></div>
+<div class="price pmc" data-pmc="146.1">
+<div class="left">
+<span class="label">PMC 18%</span>
+<span aria-label="preço original" class="orig">R$ 146,10</span>
+</div>
+<span class="value" data-kind="pmc">R$ 146,10</span>
+</div>
+</div>
+</article>
+</section>
+<div class="empty" id="emptyState">Nenhum item encontrado para sua busca/filtragem.</div>
+<div aria-hidden="true" class="footer-space"></div>
+</main>
+<!-- Toolbar inferior com ações rápidas -->
+<nav aria-label="Ações rápidas" class="toolbar" role="navigation">
+<button class="t-btn" id="scrollTop" title="Topo" type="button">
+<span>Topo</span>
+</button>
+<button class="t-btn" id="resetBtn" title="Redefinir filtros" type="button">
+<span>Redefinir</span>
+</button>
+</nav>
+<script>
+/* ===== Util ===== */
+const $ = (sel, el=document) => el.querySelector(sel);
+const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+const moneyBR = (n) => n.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+
+/* ===== Boot ===== */
+const grid = $("#grid");
+const emptyState = $("#emptyState");
+const searchInput = $("#search");
+const clearBtn = $("#clearBtn");
+const chips = $("#chips");
+const updatedAt = $("#updatedAt");
+
+/* Exibe timestamp humano de atualização */
+(function stamp(){
+  const d = new Date();
+  const f = d.toLocaleString("pt-BR", { dateStyle:"short", timeStyle:"short" });
+  updatedAt.textContent = "Atualizado " + f;
+})();
+
+/* ===== Importa cards automaticamente se a página for colada dentro do arquivo antigo =====
+   Se detectar <article.card> fora do #grid, move para dentro. */
+(function importCards(){
+  const cardsOutside = $$("article.card:not(#grid .card)");
+  if(cardsOutside.length){
+    cardsOutside.forEach(c => grid.appendChild(c));
+  }
+})();
+
+/* ===== Descontos PF/PMC com persistência ===== */
+const discPFEl = $("#discPF");
+const discPMCEl = $("#discPMC");
+
+const APP_VERSION = '1.1.0';
+const state = {
+  discPF: 0,
+  discPMC: 0,
+  filter: "*",
+  query: ""
+};
+
+// carrega estado salvo
+function authFreshStart(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('lista_preco_state')||'{}');
+    if(saved.app_version !== APP_VERSION){ localStorage.removeItem('lista_preco_state'); }
+  }catch{}
+}
+(function loadState(){
+  try {
+    const saved = JSON.parse(localStorage.getItem("lista_preco_state") || "{}");
+    if(typeof saved.discPF === "number") state.discPF = saved.discPF;
+    if(typeof saved.discPMC === "number") state.discPMC = saved.discPMC;
+    if(typeof saved.filter === "string") state.filter = saved.filter;
+    if(typeof saved.query === "string") state.query = saved.query;
+  } catch {}
+  discPFEl.textContent = state.discPF;
+  discPMCEl.textContent = state.discPMC;
+  searchInput.value = state.query;
+  // ativa chip correspondente
+  const active = $(`.chip[data-filter="${CSS.escape(state.filter)}"]`);
+  if(active){ $$(".chip").forEach(c=>c.classList.remove("active")); active.classList.add("active"); }
+})();
+
+function persist(){
+  state.app_version = APP_VERSION;
+  localStorage.setItem("lista_preco_state", JSON.stringify(state));
+}
+
+function applyDiscounts(){
+  const cards = $$("#grid .card");
+  cards.forEach(card => {
+    const pf = card.querySelector(".price.pf");
+    const pmc = card.querySelector(".price.pmc");
+    if(pf){
+      const base = parseFloat(pf.getAttribute("data-pf"));
+      const valueEl = pf.querySelector(".value");
+      const origEl = pf.querySelector(".orig");
+      if(!isNaN(base)){
+        const v = base * (1 - state.discPF/100);
+        valueEl.textContent = moneyBR(v);
+        origEl.textContent = moneyBR(base);
+      } else {
+        valueEl.textContent = "—";
+        if(origEl) origEl.textContent = "—";
+      }
+    }
+    if(pmc){
+      const base = parseFloat(pmc.getAttribute("data-pmc"));
+      const valueEl = pmc.querySelector(".value");
+      const origEl = pmc.querySelector(".orig");
+      if(!isNaN(base)){
+        const v = base * (1 - state.discPMC/100);
+        valueEl.textContent = moneyBR(v);
+        origEl.textContent = moneyBR(base);
+      } else {
+        valueEl.textContent = "—";
+        if(origEl) origEl.textContent = "—";
+      }
+    }
+  });
+}
+
+
+// === Dynamic chips from dataset ===
+function buildChips() {
+  const set = new Set(['*']);
+  $$('#grid .card').forEach(card => {
+    const d = (card.dataset.prod || (card.querySelector('.prod')?.textContent || '')).trim();
+    if(d) {
+      // take the first token before space to use as family (ex.: ALIVIUM)
+      const key = d.split(/\s+/)[0].toUpperCase();
+      set.add(key);
+    }
+  });
+  chips.innerHTML = '';
+  [...set].forEach((key,i)=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + ( (state.filter === key || (state.filter === '*' && key==='*')) ? ' active' : '' );
+    b.dataset.filter = key;
+    b.textContent = key === '*' ? 'Todos' : key;
+    chips.appendChild(b);
+  });
+}
+function updateCounter() {
+  const total = $$('#grid .card').length;
+  const vis = $$('#grid .card:not(.hidden)').length;
+  const c = $('#counter'); if(c) c.textContent = vis + '/' + total + ' itens';
+}
+
+
+// === Paletas por chip ===
+const THEMES = ["laranja","azul","verde","branco","preto"];
+function setTheme(name){
+  if(!THEMES.includes(name)) return;
+  document.documentElement.dataset.theme = name;
+  localStorage.setItem("themeMode", name);
+  // ativar chip
+  $$("#themeChips .chip").forEach(c=> c.classList.toggle("active", c.dataset.theme===name));
+}
+function buildThemeChips(){
+  const row = $("#themeChips");
+  row.innerHTML = "";
+  THEMES.forEach(t=>{
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.dataset.theme = t;
+    b.textContent = t[0].toUpperCase() + t.slice(1);
+    row.appendChild(b);
+  });
+  // estado inicial
+  const saved = localStorage.getItem("themeMode");
+  setTheme(saved && THEMES.includes(saved) ? saved : "azul");
+  row.addEventListener("click", e=>{
+    const btn = e.target.closest(".chip");
+    if(!btn) return;
+    setTheme(btn.dataset.theme);
+  });
+}
+
+function applyFilters(){
+  const q = state.query.trim().toLowerCase();
+  const flt = state.filter;
+  let visible = 0;
+  const cards = $$("#grid .card");
+  cards.forEach(card => {
+    const name = (card.querySelector(".prod")?.textContent || "").toLowerCase();
+    const apr = (card.querySelector(".apres")?.textContent || "").toLowerCase();
+    const byChip = (flt === "*" || card.dataset.prod?.toLowerCase().includes(flt.toLowerCase()));
+    const bySearch = (!q || name.includes(q) || apr.includes(q));
+    const show = byChip && bySearch;
+    card.classList.toggle("hidden", !show);
+    if(show) visible++;
+  });
+  emptyState.style.display = visible ? "none" : "block";
+  updateCounter();
+}
+
+/* ===== Eventos ===== */
+// descontos
+$("#minusPF").addEventListener("click", ()=>{ state.discPF = Math.max(0, state.discPF-1); discPFEl.textContent = state.discPF; applyDiscounts(); persist(); });
+$("#plusPF").addEventListener("click",  ()=>{ state.discPF = Math.min(95, state.discPF+1); discPFEl.textContent = state.discPF; applyDiscounts(); persist(); });
+$("#minusPMC").addEventListener("click", ()=>{ state.discPMC = Math.max(0, state.discPMC-1); discPMCEl.textContent = state.discPMC; applyDiscounts(); persist(); });
+$("#plusPMC").addEventListener("click",  ()=>{ state.discPMC = Math.min(95, state.discPMC+1); discPMCEl.textContent = state.discPMC; applyDiscounts(); persist(); });
+
+// chips
+chips.addEventListener("click", (e)=>{
+  const b = e.target.closest(".chip");
+  if(!b) return;
+  $$(".chip").forEach(c=>c.classList.remove("active"));
+  b.classList.add("active");
+  state.filter = b.dataset.filter;
+  applyFilters();
+  persist();
+});
+
+// busca com debounce
+let t;
+searchInput.addEventListener("input", ()=>{
+  clearTimeout(t);
+  t = setTimeout(()=>{
+    state.query = searchInput.value;
+    buildChips(); applyFilters(); persist();
+  }, 120);
+});
+clearBtn.addEventListener("click", ()=>{
+  searchInput.value = ""; state.query = ""; buildChips(); applyFilters(); persist();
+  searchInput.focus();
+});
+
+// toolbar
+$("#resetBtn").addEventListener("click", ()=>{
+  state.discPF = 0; state.discPMC = 0; state.filter = "*"; state.query = "";
+  discPFEl.textContent = 0; discPMCEl.textContent = 0;
+  searchInput.value = "";
+  $$(".chip").forEach(c=>c.classList.remove("active"));
+  $(".chip[data-filter='*']").classList.add("active");
+  applyDiscounts(); buildChips(); applyFilters(); persist();
+});
+$("#scrollTop").addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
+
+// compartilhar (navigator.share se disponível)
+$("#shareBtn").addEventListener("click", async ()=>{
+  const data = {
+    title: document.title,
+    text: "Confira a lista de preços atualizada.",
+    url: location.href
+  };
+  try {
+    if(navigator.share){
+      await navigator.share(data);
+    } else {
+      await navigator.clipboard.writeText(location.href);
+      alert("Link copiado!");
+    }
+  } catch {}
+});
+
+// salvar estado
+$("#saveBtn").addEventListener("click", ()=>{
+  persist();
+  const el = document.body;
+  el.classList.add("highlight");
+  setTimeout(()=> el.classList.remove("highlight"), 600);
+});
+
+
+// Primeira renderização
+authFreshStart();
+buildThemeChips();
+buildChips();
+applyDiscounts();
+applyFilters();
+updateCounter();
+</script>
+<script>
+(function(){
+  const THEMES = ["laranja","azul","verde","branco","preto"];
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  // Hard-coded brand hex by theme for the meta color (visual in mobile chrome)
+  const BRAND_HEX = {
+    laranja:"#ff7a1a", azul:"#0a64ff", verde:"#22c55e", branco:"#111827", preto:"#ff7a1a"
+  };
+  function setThemeHard(name){
+    if(!THEMES.includes(name)) return;
+    document.documentElement.dataset.theme = name;
+    try{ localStorage.setItem("themeMode", name); }catch{}
+    const row = document.getElementById("themeChips");
+    if(row){
+      Array.from(row.querySelectorAll(".chip")).forEach(c => c.classList.toggle("active", c.dataset.theme===name));
+    }
+    if(themeMeta && BRAND_HEX[name]) themeMeta.setAttribute("content", BRAND_HEX[name]);
+    // Force style recalc hint
+    document.body.style.outlineColor = getComputedStyle(document.documentElement).getPropertyValue('--brand').trim();
+  }
+  // Wire to existing chips
+  const row = document.getElementById("themeChips");
+  if(row){
+    row.addEventListener("click", (e)=>{
+      const b = e.target.closest(".chip"); if(!b) return;
+      setThemeHard(b.dataset.theme);
+    });
+  }
+  // Initial apply
+  const saved = (function(){ try { return localStorage.getItem("themeMode"); } catch { return null; } })();
+  setThemeHard(saved && THEMES.includes(saved) ? saved : "azul");
+  // Expose for debugging
+  window.__setTheme = setThemeHard;
+})();
+</script>
+
+<!-- ====== BANNER AZUL FIXO + COMPARTILHAMENTO (SOMENTE PMC) ====== -->
+<style>
+#shareHint {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10000;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  letter-spacing: .2px;
+  font-size: 14px;
+}
+body.has-share-hint { padding-top: 48px; }
+
+.card.selectable { cursor: pointer; transition: transform .15s ease; }
+.card.selectable:hover { transform: translateY(-1px); }
+.card.selected { outline: 3px solid var(--brand); outline-offset: 2px; background: color-mix(in oklab, var(--brand) 12%, var(--card)); }
+
+#shareBarWrapper {
+  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px; z-index: 9999; justify-content: center; flex-wrap: wrap;
+}
+#shareTextBtn, #clearSelBtn {
+  background: var(--brand); color: #fff; font-weight: 700; border-radius: 12px;
+  padding: 12px 22px; box-shadow: 0 6px 16px rgba(0,0,0,.25); cursor: pointer;
+  border: none; font-size: 15px; transition: opacity .2s ease;
+}
+#clearSelBtn { background: #555; }
+#shareTextBtn.disabled { opacity: .4; pointer-events: none; }
+</style>
+
+<script>
+window.addEventListener("load", function(){
+  // Banner fixo azul
+  const hint = document.createElement('div');
+  hint.id = 'shareHint';
+  hint.textContent = '💊 Selecione os produtos que deseja compartilhar 👇';
+  document.body.prepend(hint);
+  document.body.classList.add('has-share-hint');
+
+  const cards = document.querySelectorAll('.card');
+  if (!cards.length) return;
+
+  // Barra inferior
+  const wrap = document.createElement('div');
+  wrap.id = 'shareBarWrapper';
+  const shareBtn = document.createElement('button');
+  shareBtn.id = 'shareTextBtn';
+  shareBtn.textContent = '📤 Compartilhar (0)';
+  shareBtn.classList.add('disabled');
+  const clearBtn = document.createElement('button');
+  clearBtn.id = 'clearSelBtn';
+  clearBtn.textContent = '❌ Limpar seleção';
+  wrap.appendChild(shareBtn);
+  wrap.appendChild(clearBtn);
+  document.body.appendChild(wrap);
+
+  // Seleção
+  cards.forEach(card => {
+    card.classList.add('selectable');
+    card.addEventListener('click', () => {
+      card.classList.toggle('selected');
+      const n = document.querySelectorAll('.card.selected').length;
+      shareBtn.classList.toggle('disabled', n === 0);
+      shareBtn.textContent = `📤 Compartilhar (${n})`;
+    });
+  });
+
+  // Compartilhar (somente PMC)
+  shareBtn.addEventListener('click', () => {
+    const clean2 = (t) => (t || "")
+      .normalize('NFC')
+      .replace(/\uFFFD/g, "")
+      .replace(/[\u00A0\u202F\u200B\u200C\u200D\uFEFF\u2060\u00AD]/g, " ")
+      .replace(/[\x00-\x1F\x7F-\x9F]/g, "")
+      .replace(/\uFE0F/g, "")
+      .replace(/[^\p{L}\p{N}\p{P}\p{M}\s]/gu, "") 
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const selected = Array.from(document.querySelectorAll('.card.selected'));
+    if (!selected.length) return;
+
+    let msg = "*LISTA DE PREÇOS MANTECORP*\n\n";
+
+    selected.forEach(card => {
+      const nome = clean2(card.querySelector('.prod')?.textContent);
+      const apres = clean2(card.querySelector('.apres')?.textContent);
+      const pmc = clean2(card.querySelector('.value[data-kind=\"pmc\"]')?.textContent);
+      const pos = clean2(card.querySelector('.info-tag.posologia')?.textContent);
+      const age = clean2(card.querySelector('.info-tag.idade')?.textContent);
+      if (nome) msg += nome + "\n";
+      if (apres) msg += apres + "\n";
+      if (pmc) msg += "- PMC: " + pmc + "\n";
+      if (pos) msg += "Posologia: " + pos + "\n";
+      if (age) msg += "Idade: " + age + "\n";
+      msg += "-------------------------\n";
+    });
+
+    msg += "Lista atualizada — Mantecorp";
+
+    msg = msg.normalize('NFC').replace(/\uFFFD/g, "").replace(/[\u00A0\u202F\u200B\u200C\u200D\uFEFF\u2060\u00AD]/g, " ");
+    const url = "https://wa.me/?text=" + encodeURIComponent(msg);
+    window.open(url, "_blank");
+});
+
+  // Limpar seleção
+  clearBtn.addEventListener('click', () => {
+    document.querySelectorAll('.card.selected').forEach(c => c.classList.remove('selected'));
+    shareBtn.classList.add('disabled');
+    shareBtn.textContent = '📤 Compartilhar (0)';
+  });
+});
+</script>
+
+</body>
+</html>
