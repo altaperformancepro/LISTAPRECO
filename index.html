@@ -2815,12 +2815,12 @@ window.addEventListener("load", function(){
       if (nome) msg += "*"+ nome +"*"+ "\n";
       if (apres) msg += apres + "\n";
       if (pmc) msg += "- PMC: " + pmc + "\n";
-      if (pos) msg += "Posologia: " + pos + "\n";
-      if (age) msg += "Idade: " + age + "\n";
+      if (pos) msg += "- Posologia: " + pos + "\n";
+      if (age) msg += "- Idade: " + age + "\n";
       msg += "-------------------------\n";
     });
 
-    msg += "Lista atualizada — Mantecorp";
+    msg += "— Mantecorp";
 
     msg = msg.normalize('NFC').replace(/\uFFFD/g, "").replace(/[\u00A0\u202F\u200B\u200C\u200D\uFEFF\u2060\u00AD]/g, " ");
     const url = "https://wa.me/?text=" + encodeURIComponent(msg);
