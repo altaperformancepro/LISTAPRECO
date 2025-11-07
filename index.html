@@ -2812,7 +2812,7 @@ window.addEventListener("load", function(){
       const pmc = clean2(card.querySelector('.value[data-kind=\"pmc\"]')?.textContent);
       const pos = clean2(card.querySelector('.info-tag.posologia')?.textContent);
       const age = clean2(card.querySelector('.info-tag.idade')?.textContent);
-      if (nome) msg += "*"nome"*" + "\n";
+      if (nome) msg += "*"+ nome +"*" "\n";
       if (apres) msg += apres + "\n";
       if (pmc) msg += "- PMC: " + pmc + "\n";
       if (pos) msg += "Posologia: " + pos + "\n";
