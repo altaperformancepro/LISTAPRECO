@@ -2607,10 +2607,10 @@ function applyFilters(){
 
 /* ===== Eventos ===== */
 // descontos
-$("#minusPF").addEventListener("click", ()=>{ state.discPF = Math.max(0, state.discPF-1); discPFEl.textContent = state.discPF; applyDiscounts(); persist(); });
-$("#plusPF").addEventListener("click",  ()=>{ state.discPF = Math.min(95, state.discPF+1); discPFEl.textContent = state.discPF; applyDiscounts(); persist(); });
-$("#minusPMC").addEventListener("click", ()=>{ state.discPMC = Math.max(0, state.discPMC-1); discPMCEl.textContent = state.discPMC; applyDiscounts(); persist(); });
-$("#plusPMC").addEventListener("click",  ()=>{ state.discPMC = Math.min(95, state.discPMC+1); discPMCEl.textContent = state.discPMC; applyDiscounts(); persist(); });
+$("#minusPF").addEventListener("click", ()=>{ state.discPF = Math.max(0, state.discPF-1); discPFEl.textContent = state.discPF + "%"; applyDiscounts(); persist(); });
+$("#plusPF").addEventListener("click",  ()=>{ state.discPF = Math.min(95, state.discPF+1); discPFEl.textContent = state.discPF + "%"; applyDiscounts(); persist(); });
+$("#minusPMC").addEventListener("click", ()=>{ state.discPMC = Math.max(0, state.discPMC-1); discPMCEl.textContent = state.discPMC + "%"; applyDiscounts(); persist(); });
+$("#plusPMC").addEventListener("click",  ()=>{ state.discPMC = Math.min(95, state.discPMC+1); discPMCEl.textContent = state.discPMC + "%"; applyDiscounts(); persist(); });
 
 // chips
 chips.addEventListener("click", (e)=>{
@@ -2640,10 +2640,8 @@ clearBtn.addEventListener("click", ()=>{
 // toolbar
 $("#resetBtn").addEventListener("click", ()=>{
   state.discPF = 0; state.discPMC = 0; state.filter = "*"; state.query = "";
-  discPFEl.textContent = 0; discPMCEl.textContent = 0;
+  discPFEl.textContent = "0%"; discPMCEl.textContent = "0%";
   searchInput.value = "";
-  $$(".chip").forEach(c=>c.classList.remove("active"));
-  $(".chip[data-filter='*']").classList.add("active");
   applyDiscounts(); buildChips(); applyFilters(); persist();
 });
 $("#scrollTop").addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
