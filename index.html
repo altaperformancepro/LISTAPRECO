@@ -1,44 +1,336 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>Receituário Cannabis</title>
-    <meta name="description" content="Plataforma de Prescrição e Gestão">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lista de Preço Mantecorp</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f0f2f7;--card:#fff;--text:#1a1a2e;--text2:#666;--text3:#999;
+  --border:#e2e4ea;--primary:#2563eb;--primary-fg:#fff;--primary-light:rgba(37,99,235,.1);
+  --accent:#eef2ff;--muted:#f1f3f9;--muted-fg:#6b7280;
+  --green:#137333;--green-light:#e6f4ea;--shadow-card:0 4px 16px -2px rgba(0,0,0,.12),0 2px 6px -1px rgba(0,0,0,.08);
+  --shadow-hover:0 12px 40px -8px rgba(0,0,0,.22),0 6px 16px -4px rgba(0,0,0,.12);
+  --shadow-selected:0 8px 28px -4px rgba(0,0,0,.18),0 4px 12px -2px rgba(0,0,0,.1);
+}
+[data-theme="laranja"]{--primary:#ea580c;--primary-light:rgba(234,88,12,.1);--accent:#fff7ed}
+[data-theme="verde"]{--primary:#16a34a;--primary-light:rgba(22,163,74,.1);--accent:#f0fdf4}
+[data-theme="branco"]{--primary:#1a1a2e;--primary-light:rgba(26,26,46,.08);--accent:#f5f5f5}
+[data-theme="preto"]{--bg:#d6d6d6;--card:#1a1a1a;--text:#f5f5f5;--text2:#aaa;--text3:#777;--border:#333;--primary:#eab308;--primary-fg:#111;--primary-light:rgba(234,179,8,.12);--accent:#222;--muted:#222;--muted-fg:#888;--shadow-card:0 4px 16px -2px rgba(0,0,0,.3),0 2px 6px -1px rgba(0,0,0,.2);--shadow-hover:0 12px 40px -8px rgba(0,0,0,.5),0 6px 16px -4px rgba(0,0,0,.3);--shadow-selected:0 8px 28px -4px rgba(0,0,0,.4),0 4px 12px -2px rgba(0,0,0,.25)}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
 
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Receituário Cannabis - Gift Hub">
-    <meta property="og:description" content="Acesse a plataforma oficial de prescrição.">
-    
-    <meta property="og:image" content="https://raw.githubusercontent.com/altaperformancepro/RECEITURARIOCANABIS/main/PREVISACANABIS.png">
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/altaperformancepro/RECEITURARIOCANABIS/main/PREVISACANABIS.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    
-    <meta property="og:url" content="https://altaperformancepro.github.io/RECEITURARIOCANABIS/">
+/* Banner */
+.banner{position:sticky;top:0;z-index:60;background:var(--primary);color:var(--primary-fg);text-align:center;padding:10px 12px;font-size:14px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#008037">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+/* Header */
+.top-bar{height:4px;background:var(--primary)}
+.header{background:var(--card);border-bottom:1px solid var(--border)}
+.header-inner{max-width:1000px;margin:0 auto;padding:12px 12px 16px}
+.brand{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between}
+.brand h1{font-size:16px;font-weight:900;letter-spacing:-.3px;display:flex;align-items:center;gap:6px}
+.brand h1 svg{width:20px;height:20px}
+.brand .badge{font-size:11px;font-weight:600;background:var(--primary);color:var(--primary-fg);border-radius:999px;padding:4px 10px}
+.subtitle{font-size:11px;color:var(--text3);margin-top:4px}
+.counter{font-family:monospace;font-size:11px;background:var(--accent);border:1px solid var(--border);border-radius:4px;padding:1px 6px}
 
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #000; }
-        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-    </style>
+/* Search */
+.search-wrap{position:relative;margin-top:10px}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted-fg);opacity:.6}
+.search-wrap input{width:100%;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);padding:0 56px 0 38px;font-size:14px;color:var(--text);outline:none;transition:border .15s,box-shadow .15s}
+.search-wrap input:focus{border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-light)}
+.search-wrap .clear-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;font-size:12px;color:var(--muted-fg);cursor:pointer;padding:4px 8px;border-radius:6px}
+.search-wrap .clear-btn:hover{background:var(--accent);color:var(--text)}
+
+/* Filter select */
+.filter-row{margin-top:10px}
+.filter-row select{width:100%;height:40px;border-radius:12px;border:1px solid var(--border);padding:0 12px;font-size:14px;font-weight:500;background:var(--card);color:var(--text);cursor:pointer}
+
+/* Theme chips */
+.section-label{font-size:11px;font-weight:800;color:var(--primary);letter-spacing:.5px;text-transform:uppercase;margin:10px 0 6px}
+.themes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.themes button{border:2px solid transparent;border-radius:999px;padding:6px 16px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;transition:transform .1s,box-shadow .15s}
+.themes button:active{transform:translateY(1px)}
+.themes button.active{box-shadow:0 0 0 3px var(--primary-light)}
+
+/* ICMS */
+.icms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+@media(min-width:640px){.icms-grid{grid-template-columns:repeat(5,1fr)}}
+.icms-btn{display:flex;flex-direction:column;align-items:flex-start;padding:8px 10px;border-radius:12px;border:1px solid var(--border);background:var(--card);cursor:pointer;transition:all .15s}
+.icms-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.icms-btn.active{border-color:var(--primary);background:var(--primary-light)}
+.icms-btn .rate{font-size:13px;font-weight:900}
+.icms-btn.active .rate{color:var(--primary)}
+.icms-btn .states{font-size:9px;color:var(--primary);opacity:.7;line-height:1.2}
+
+/* Discount bars */
+.disc-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
+@media(min-width:640px){.disc-grid{grid-template-columns:1fr 1fr}}
+.disc-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;border:1px solid var(--border);background:var(--accent)}
+.disc-row .label{font-size:11px;font-weight:800;color:var(--primary);letter-spacing:.5px}
+.disc-row .controls{margin-left:auto;display:flex;align-items:center;gap:6px}
+.disc-row button{width:32px;height:32px;border-radius:8px;border:1px solid color-mix(in srgb,var(--primary) 30%,transparent);background:var(--card);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .1s}
+.disc-row button:hover{box-shadow:0 0 0 3px var(--primary-light)}
+.disc-row button:active{transform:translateY(1px)}
+.disc-row .val{min-width:48px;text-align:center;font-weight:900;font-size:14px}
+
+/* Product grid */
+.grid{display:grid;grid-template-columns:1fr;gap:12px;padding:12px 0 100px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1280px){.grid{grid-template-columns:repeat(4,1fr)}}
+
+/* Cards with 3D depth */
+.card{background:var(--card);border-radius:16px;padding:12px;border:1px solid var(--border);cursor:pointer;transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-card);perspective:800px}
+.card:hover{transform:translateY(-4px) scale(1.01);box-shadow:var(--shadow-hover)}
+.card.selected{outline:3px solid var(--primary);outline-offset:2px;background:var(--primary-light);box-shadow:var(--shadow-selected);transform:translateY(-2px)}
+.card h3{font-size:14px;font-weight:800;letter-spacing:-.2px}
+.card .apr{font-size:12px;color:var(--text2);line-height:1.4}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:10px;padding:3px 8px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;gap:3px}
+.tag-pos{background:var(--primary-light);color:var(--primary)}
+.tag-age{background:var(--green-light);color:var(--green)}
+.prices{display:grid;grid-template-columns:1fr 1px 1fr;margin-top:auto;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.price-col{display:flex;align-items:center;justify-content:space-between;padding:8px;gap:4px}
+.price-col .info{display:flex;flex-direction:column;gap:2px}
+.price-label{font-size:10px;font-weight:800;color:color-mix(in srgb,var(--primary) 60%,transparent);text-transform:uppercase;letter-spacing:.5px}
+.price-old{font-size:10px;color:var(--text3);text-decoration:line-through}
+.price-val{font-size:13px;font-weight:900}
+.price-div{background:var(--border)}
+.empty{text-align:center;color:var(--muted-fg);padding:60px 20px;font-size:14px}
+
+/* Bottom toolbar */
+.toolbar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:color-mix(in srgb,var(--card) 95%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid color-mix(in srgb,var(--primary) 20%,transparent);padding:8px 12px}
+@media(min-width:640px){.toolbar{left:50%;right:auto;transform:translateX(-50%);bottom:12px;width:auto;min-width:400px;max-width:600px;border-radius:16px;border:1px solid color-mix(in srgb,var(--primary) 30%,transparent);box-shadow:0 8px 30px rgba(0,0,0,.15)}}
+.toolbar-inner{display:flex;flex-direction:column;gap:8px}
+.tb-row{display:flex;gap:8px}
+.tb-btn{flex:1;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--accent);font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--text);transition:transform .1s}
+.tb-btn:active{transform:translateY(1px)}
+.tb-share{background:var(--primary)!important;color:var(--primary-fg)!important;border:none!important;font-weight:700!important;font-size:13px!important}
+.tb-clear{flex:none!important;width:40px!important;background:var(--muted)!important;border:none!important;color:var(--muted-fg)!important}
+
+/* Scrollbar */
+.scrollbar-hide::-webkit-scrollbar{display:none}
+.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+</style>
 </head>
 <body>
+<div class="banner">💊 Selecione os produtos que deseja compartilhar 👇</div>
+<div class="top-bar"></div>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <h1>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6" stroke-linecap="round"/></svg>
+        LISTA DE PREÇO MANTECORP
+      </h1>
+      <span class="badge" id="dateBadge"></span>
+    </div>
+    <p class="subtitle">Catálogo otimizado para mobile · filtros rápidos · <span class="counter" id="counter"></span></p>
 
-    <iframe src="https://cannabis-mantecorp.lovable.app" allowfullscreen></iframe>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="searchInput" placeholder="Buscar por produto ou apresentação..." autocomplete="off">
+      <button class="clear-btn" id="clearSearch" style="display:none">Limpar</button>
+    </div>
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js');
-            });
-        }
-    </script>
+    <div class="filter-row">
+      <select id="familyFilter"><option value="*">Todos</option></select>
+    </div>
+
+    <p class="section-label">🎨 TEMA</p>
+    <div class="themes" id="themes"></div>
+
+    <p class="section-label">📍 ICMS POR ESTADO</p>
+    <div class="icms-grid" id="icmsGrid"></div>
+
+    <div class="disc-grid" id="discounts"></div>
+  </div>
+</header>
+
+<main style="max-width:1000px;margin:0 auto;padding:0 12px">
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" style="display:none">Nenhum item encontrado para sua busca/filtragem.</p>
+</main>
+
+<div class="toolbar">
+  <div class="toolbar-inner" id="toolbar"></div>
+</div>
+
+<script>
+const products = [{"id":1,"produto":"ALEKTOS","apresentacao":"20mg Comprimidos 20un","posologia":"1 comprimido ao dia","idade":"A partir de 12 anos","pf":55.61,"pmc":74.6,"pf_original":72.1,"pmc_original":96.72},{"id":2,"produto":"ALEKTOS","apresentacao":"20mg Comprimidos 30un","posologia":"1 comprimido ao dia","idade":"A partir de 12 anos","pf":105.89,"pmc":142.05,"pf_original":108.27,"pmc_original":145.24},{"id":3,"produto":"ALEKTOS DERM","apresentacao":"Loção Hidratante 200mL","idade":"A partir do 7º dia de vida","pf":81.81,"pmc":109.29,"pf_original":81.81,"pmc_original":109.29},{"id":4,"produto":"ALEKTOS DERM","apresentacao":"Loção Hidratante 450mL","idade":"A partir do 7º dia de vida","pf":112.91,"pmc":154.71,"pf_original":112.91,"pmc_original":154.71},{"id":5,"produto":"ALEKTOS PED","apresentacao":"2,5mg/mL Solução Oral 120mL + Copo","posologia":"10 mg (4 mL) uma vez ao dia","idade":"A partir de 6 anos","pf":67.62,"pmc":90.71,"pf_original":67.62,"pmc_original":90.71},{"id":6,"produto":"ALIVIUM","apresentacao":"600mg Cápsula Líquida 10un","posologia":"1 cápsula, 3 a 4 vezes ao dia (a cada 6-8h)","idade":"A partir de 12 anos","pf":36.05,"pmc":49.84,"pf_original":36.05,"pmc_original":49.84},{"id":7,"produto":"ALIVIUM","apresentacao":"Infantil 100mg/mL Suspensão 20mL","posologia":"1 gota/kg/dose, 3 a 4x ao dia","idade":"A partir de 6 meses","pf":36.83,"pmc":49.41,"pf_original":36.83,"pmc_original":49.41},{"id":8,"produto":"ALIVIUM GC","apresentacao":"GC 200mg/mL Gotas 20mL","posologia":"1 gota/kg/dose, 3 a 4x ao dia","idade":"A partir de 6 meses","pf":45.13,"pmc":62.39,"pf_original":67.72,"pmc_original":93.62},{"id":9,"produto":"ALIVIUM","apresentacao":"400mg Cápsula Líquida 8un","posologia":"1 cápsula, a cada 6 a 8 horas","idade":"A partir de 12 anos","pf":19.46,"pmc":26.1,"pf_original":19.46,"pmc_original":26.1},{"id":10,"produto":"ALIVIUM","apresentacao":"400mg Cápsula Líquida 10un","posologia":"1 cápsula, a cada 6 a 8 horas","idade":"A partir de 12 anos","pf":23.63,"pmc":31.7,"pf_original":23.63,"pmc_original":31.7},{"id":11,"produto":"ALIVIUM","apresentacao":"400mg Cápsula Líquida 20un","posologia":"1 cápsula, a cada 6 a 8 horas","idade":"A partir de 12 anos","pf":43.15,"pmc":57.88,"pf_original":43.15,"pmc_original":57.88},{"id":12,"produto":"AMMY","apresentacao":"4mg Comprimidos 28un (24+4)","posologia":"24 dias de pílulas ativas seguidas, por 4 dias de pílulas inativas","idade":"A partir de 12 anos","pf":97.51,"pmc":130.81,"pf_original":97.51,"pmc_original":130.81},{"id":13,"produto":"AMOME","apresentacao":"50mcg Spray 60 Acionamentos","posologia":"2 jatos em cada narina, 1x ao dia","idade":"A partir de 2 anos","pf":37.56,"pmc":51.92,"pf_original":48.8,"pmc_original":67.46},{"id":14,"produto":"AMOME","apresentacao":"50mcg Spray 120 Acionamentos","posologia":"2 jatos em cada narina, 1x ao dia","idade":"A partir de 2 anos","pf":52.32,"pmc":72.33,"pf_original":92.66,"pmc_original":128.1},{"id":15,"produto":"CELESTAMINE","apresentacao":"Xarope 120mL + Copo Dosador","posologia":"Criança: 1,25 a 2,5 mL, 3x ao dia | Adulto: 2,5 mL, 3x ao dia","idade":"A partir de 2 anos","pf":52.63,"pmc":70.6,"pf_original":52.63,"pmc_original":70.6},{"id":16,"produto":"CELESTAMINE","apresentacao":"Gotas 20mL","posologia":"Criança: 12 gotas 3x ao dia | Adulto: 24 a 48 gotas 3x ao dia","idade":"A partir de 2 anos","pf":43.87,"pmc":58.85,"pf_original":43.87,"pmc_original":58.85},{"id":17,"produto":"DESCON","apresentacao":"Gotas 20mL","posologia":"2 gotas/kg/dia (dividido em 3 doses)","idade":"A partir de 2 anos","pf":11,"pmc":14.76,"pf_original":11,"pmc_original":14.76},{"id":18,"produto":"DESCON","apresentacao":"Xarope 120mL + Copo Dosador","posologia":"Crianças: 2,5-5 mL 4x/dia | Adultos: 10-15 mL 3-4x/dia","idade":"A partir de 2 anos","pf":16.2,"pmc":21.73,"pf_original":16.2,"pmc_original":21.73},{"id":19,"produto":"DESCON","apresentacao":"Comprimidos 12un (Liberação Prolongada)","posologia":"1 comprimido a cada 12 horas","idade":"A partir de 12 anos","pf":20.37,"pmc":27.33,"pf_original":20.37,"pmc_original":27.33},{"id":20,"produto":"DIPROSPAN","apresentacao":"1mL Ampola + Seringa","posologia":"Dose conforme indicação médica","idade":"A partir de 12 anos","pf":36.6,"pmc":50.6,"pf_original":36.6,"pmc_original":50.6},{"id":21,"produto":"DIPROSPAN","apresentacao":"1mL Seringa Preenchida Hypak","posologia":"Dose conforme indicação médica","idade":"A partir de 12 anos","pf":42.22,"pmc":58.37,"pf_original":42.22,"pmc_original":58.37},{"id":22,"produto":"DIPROSPAN","apresentacao":"1mL Caixa com 6 Ampolas","posologia":"Dose conforme indicação médica","idade":"A partir de 12 anos","pf":180.33,"pmc":249.3,"pf_original":236.43,"pmc_original":326.85},{"id":23,"produto":"DRAMIN","apresentacao":"25mg Cápsula Mole 10un","posologia":"1 a 2 cápsulas a cada 6-8 horas","idade":"A partir de 6 anos","pf":27.48,"pmc":36.86,"pf_original":27.48,"pmc_original":36.86},{"id":24,"produto":"DRAMIN","apresentacao":"50mg Cápsula Mole 10un","posologia":"1 a 2 cápsulas a cada 4-6 horas (máx 4/dia)","idade":"A partir de 12 anos","pf":47.77,"pmc":64.08,"pf_original":47.77,"pmc_original":64.08},{"id":25,"produto":"DRAMIN B6","apresentacao":"Comprimido Revestido 30un","posologia":"1 a 2 comprimidos a cada 4 horas (máx 8/dia)","idade":"A partir de 12 anos","pf":19.02,"pmc":25.51,"pf_original":19.02,"pmc_original":25.51},{"id":26,"produto":"DRAMIN B6","apresentacao":"Gotas 30mL","posologia":"1 gota/kg a cada 6-8 horas (máx 60 gotas/dia)","idade":"A partir de 2 anos","pf":18.15,"pmc":24.35,"pf_original":18.15,"pmc_original":24.35},{"id":27,"produto":"ECOXE","apresentacao":"60mg Comprimidos 7un","posologia":"1 comprimido ao dia","idade":"A partir de 18 anos","pf":48.83,"pmc":67.5,"pf_original":55.51,"pmc_original":76.74},{"id":28,"produto":"ECOXE","apresentacao":"60mg Comprimidos 14un","posologia":"1 comprimido ao dia","idade":"A partir de 18 anos","pf":97.35,"pmc":134.58,"pf_original":111.04,"pmc_original":153.51},{"id":29,"produto":"ECOXE","apresentacao":"90mg Comprimidos 7un","posologia":"1 comprimido ao dia","idade":"A partir de 18 anos","pf":54.83,"pmc":75.8,"pf_original":61.98,"pmc_original":85.68},{"id":30,"produto":"ECOXE","apresentacao":"90mg Comprimidos 14un","posologia":"1 comprimido ao dia","idade":"A partir de 18 anos","pf":108.51,"pmc":150.01,"pf_original":123.96,"pmc_original":171.37},{"id":31,"produto":"ESOL XR","apresentacao":"20mg Cápsulas Duras 28un","posologia":"1 comprimido ao dia","idade":"A partir de 18 anos","pf":55.21,"pmc":76.32,"pf_original":130.68,"pmc_original":180.66},{"id":32,"produto":"ESOL XR","apresentacao":"40mg Cápsulas Duras 28un","posologia":"1 comprimido ao dia","idade":"A partir de 18 anos","pf":110.46,"pmc":152.7,"pf_original":273.99,"pmc_original":378.78},{"id":33,"produto":"KELAC","apresentacao":"10mg Comprimidos 4un","posologia":"1 comprimido a cada 6-8h","idade":"A partir de 12 anos","pf":15.38,"pmc":21.26,"pf_original":15.38,"pmc_original":21.26},{"id":34,"produto":"KELAC","apresentacao":"10mg Comprimidos 10un","posologia":"1 comprimido a cada 6-8h","idade":"A partir de 12 anos","pf":26.54,"pmc":36.69,"pf_original":38.41,"pmc_original":53.1},{"id":35,"produto":"KELAC","apresentacao":"10mg Comprimidos 20un","posologia":"1 comprimido a cada 6h ou 8h","idade":"A partir de 12 anos","pf":36.67,"pmc":50.69,"pf_original":76.82,"pmc_original":106.2},{"id":36,"produto":"LISADOR","apresentacao":"Comprimidos 16un","posologia":"Criança: 1 cpr 6 em 6h | Adultos: 1 a 2 cpr 6 em 6h","idade":"A partir de 12 anos","pf":35.46,"pmc":47.57,"pf_original":35.46,"pmc_original":47.57},{"id":37,"produto":"LISADOR","apresentacao":"Comprimidos 24un","posologia":"Criança: 1 cpr 6 em 6h | Adultos: 1 a 2 cpr 6 em 6h","idade":"A partir de 12 anos","pf":47.89,"pmc":64.24,"pf_original":47.89,"pmc_original":64.24},{"id":38,"produto":"LISADOR CÓLICA","apresentacao":"Comprimidos 20un","pf":19.85,"pmc":26.63,"pf_original":19.85,"pmc_original":26.63},{"id":39,"produto":"LISADOR DIP","apresentacao":"1g Comprimidos 10un","posologia":"Adultos: ½ a 1 cpr até 4x ao dia","idade":"A partir de 15 anos","pf":18.84,"pmc":25.27,"pf_original":18.84,"pmc_original":25.27},{"id":40,"produto":"LISADOR DIP","apresentacao":"Gotas 20mL","posologia":"Adultos: 20 a 40 gotas até 4x ao dia (40 gotas = 1g de dipirona)","idade":"A partir de 15 anos","pf":21.09,"pmc":28.29,"pf_original":21.09,"pmc_original":28.29},{"id":41,"produto":"LISADOR MUSCULAR","apresentacao":"Comprimidos 4un","posologia":"Adultos: 1 cpr 3 a 4x ao dia","idade":"A partir de 12 anos","pf":5.98,"pmc":8.02,"pf_original":5.98,"pmc_original":8.02},{"id":42,"produto":"LISADOR MUSCULAR","apresentacao":"Comprimidos 16un","posologia":"Adultos: 1 cpr 3 a 4x ao dia","idade":"A partir de 12 anos","pf":21.09,"pmc":28.29,"pf_original":21.09,"pmc_original":28.29},{"id":43,"produto":"MAXSULID","apresentacao":"400mg Comprimidos 10un","posologia":"Adultos: 1 cpr 12 em 12h","idade":"A partir de 12 anos","pf":36.9,"pmc":51.01,"pf_original":36.9,"pmc_original":51.01},{"id":44,"produto":"MAXSULID","apresentacao":"400mg Comprimidos 30un","posologia":"Adultos: 1 cpr 12 em 12h","idade":"A partir de 12 anos","pf":88.57,"pmc":122.44,"pf_original":110.57,"pmc_original":152.86},{"id":45,"produto":"NOVOTRAM","apresentacao":"50mg Cápsula 10un","posologia":"Adultos: 1 a 2 caps até 4x ao dia","idade":"A partir de 12 anos","pf":47.56,"pmc":65.75,"pf_original":47.56,"pmc_original":65.75},{"id":46,"produto":"NOVOTRAM","apresentacao":"50mg Cápsula 20un","posologia":"Adultos: 1 a 2 caps até 4x ao dia","idade":"A partir de 12 anos","pf":95.12,"pmc":131.5,"pf_original":95.12,"pmc_original":131.5},{"id":47,"produto":"NOVOTRAM","apresentacao":"Gotas 100mg/mL 10mL","posologia":"Adultos: 20 a 40 gotas | Crianças: 4 a 8 gotas por 10 kg","idade":"A partir de 1 ano","pf":82.78,"pmc":114.44,"pf_original":82.78,"pmc_original":114.44},{"id":48,"produto":"NOVOTRAM PAR","apresentacao":"37,5mg+325mg Comprimidos 10un","posologia":"Adultos: 1 a 2 cpr 4 a 6h","idade":"a partir de 12 anos","pf":28.16,"pmc":37.78,"pf_original":41.09,"pmc_original":55.12},{"id":49,"produto":"NOVOTRAM PAR","apresentacao":"37,5mg+325mg Comprimidos 20un","posologia":"Adultos: 1 a 2 cpr 4 a 6h","idade":"a partir de 12 anos","pf":49.1,"pmc":65.87,"pf_original":82.21,"pmc_original":110.28},{"id":50,"produto":"ONDIF","apresentacao":"4mg Filme Orodispersível 10un","posologia":"Adultos: 1 a 2 filmes | Crianças: 1 filme","idade":"A partir de 2 anos","pf":49.48,"pmc":66.38,"pf_original":49.48,"pmc_original":66.38},{"id":51,"produto":"ONDIF","apresentacao":"8mg Filme Orodispersível 10un","posologia":"Adultos: 1 filme","idade":"A partir de 11 anos","pf":78.7,"pmc":105.57,"pf_original":78.7,"pmc_original":105.57},{"id":52,"produto":"PRATIUM","apresentacao":"140mg/mL Gotas 15mL","posologia":"Criança: 1 gota/kg/dose, 4 a 6h | Adulto: 40 a 70 gotas 4 a 6h","idade":"a partir do nascimento","pf":28.32,"pmc":37.99,"pf_original":28.32,"pmc_original":37.99},{"id":53,"produto":"PREDSIM","apresentacao":"Gotas 11mg/mL 20mL","posologia":"Criança: 2 gota/kg dose 1x ao dia | Adulto: 40 a 70 gotas 4 a 6h","idade":"Adulto e Pediátrico","pf":33.63,"pmc":46.49,"pf_original":33.63,"pmc_original":46.49},{"id":54,"produto":"PREDSIM","apresentacao":"Solução 3mg/mL 100mL + Seringa","posologia":"Criança: Peso divido 3 (dose diária). Ex: 18 kg = 6ml dia","idade":"Adulto e Pediátrico","pf":45.32,"pmc":62.65,"pf_original":47.05,"pmc_original":65.04},{"id":55,"produto":"PREDSIM","apresentacao":"Comprimidos 5mg 20un","posologia":"5 a 60 mg dia","idade":"Adulto e Pediátrico","pf":20.09,"pmc":27.77,"pf_original":20.09,"pmc_original":27.77},{"id":56,"produto":"PREDSIM","apresentacao":"Comprimidos 10mg 10un","posologia":"5 a 60 mg dia","idade":"Adulto e Pediátrico","pf":16.23,"pmc":22.44,"pf_original":17.74,"pmc_original":24.52},{"id":57,"produto":"PREDSIM","apresentacao":"Comprimidos 20mg 20un","posologia":"5 a 60 mg dia","idade":"Adulto e Pediátrico","pf":56.41,"pmc":77.98,"pf_original":58.52,"pmc_original":80.9},{"id":58,"produto":"PREDSIM","apresentacao":"Comprimidos 40mg 10un","posologia":"5 a 60 mg dia","idade":"Adulto e Pediátrico","pf":67.93,"pmc":93.91,"pf_original":73,"pmc_original":100.92},{"id":59,"produto":"QUADRIDERM","apresentacao":"Creme 20g","posologia":"2x ao dia (manhã e noite)","idade":"Acima de 3 anos","pf":45.41,"pmc":60.92,"pf_original":45.41,"pmc_original":60.92},{"id":60,"produto":"QUADRIDERM","apresentacao":"Pomada 20g","posologia":"2x ao dia (manhã e noite)","idade":"Acima de 3 anos","pf":45.57,"pmc":61.13,"pf_original":45.57,"pmc_original":61.13},{"id":61,"produto":"Rinosoro Alto Volume","apresentacao":"30 sachês + 1 Frasco aplicador de 250mL","posologia":"2 aplicações ao dia","idade":"Crianças e Adultos","pf":71.29,"pmc":95.63,"pf_original":68.79,"pmc_original":84.99},{"id":62,"produto":"Rinosoro Alto Volume Baby","apresentacao":"15 sachês + 1 copo dosador de 60mL + 1 Seringa de 20mL","posologia":"2 aplicações ao dia","idade":"0 a 3 anos","pf":41.94,"pmc":58.3,"pf_original":41.94,"pmc_original":58.3},{"id":63,"produto":"Rinosoro Alto Volume Baby","apresentacao":"Refil com 15 sachês","posologia":"2 aplicações ao dia","idade":"0 a 3 anos","pf":26.73,"pmc":37.16,"pf_original":26.73,"pmc_original":37.16},{"id":64,"produto":"Rinosoro Alto Volume Infantil","apresentacao":"15 sachês + 1 Frasco aplicador de 120mL","posologia":"2 aplicações ao dia","idade":"4 a 11 anos","pf":39.78,"pmc":55.3,"pf_original":39.78,"pmc_original":55.3},{"id":65,"produto":"Rinosoro Alto Volume Infantil","apresentacao":"Refil com 15 sachês","posologia":"2 aplicações ao dia","idade":"4 a 11 anos","pf":25.09,"pmc":33.83,"pf_original":25.09,"pmc_original":33.83},{"id":66,"produto":"Rinosoro Gotas","apresentacao":"30mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças e Adultos","pf":16.28,"pmc":20.79,"pf_original":16.28,"pmc_original":20.79},{"id":67,"produto":"Rinosoro JET","apresentacao":"Frasco com 100mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças e Adultos","pf":36.07,"pmc":40.11,"pf_original":36.07,"pmc_original":40.11},{"id":68,"produto":"Rinosoro JET Infantil","apresentacao":"Frasco com 100mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças e Adultos","pf":36.07,"pmc":50.14,"pf_original":36.07,"pmc_original":50.14},{"id":69,"produto":"Rinosoro JET XT Infantil","apresentacao":"Frasco com 100mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças","pf":47.03,"pmc":57.99,"pf_original":47.03,"pmc_original":57.99},{"id":70,"produto":"Rinosoro Spray","apresentacao":"Spray nasal com 50mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças e Adultos","pf":24.81,"pmc":29.39,"pf_original":24.81,"pmc_original":29.39},{"id":71,"produto":"Rinosoro Spray 3%","apresentacao":"Spray nasal com 50mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças e Adultos","pf":24.81,"pmc":29.99,"pf_original":24.81,"pmc_original":29.99},{"id":72,"produto":"Rinosoro Spray Infantil","apresentacao":"Spray nasal com 50mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças","pf":25.55,"pmc":29.99,"pf_original":25.55,"pmc_original":29.99},{"id":73,"produto":"Rinosoro Spray XT","apresentacao":"Spray nasal com 50mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças e Adultos","pf":26.58,"pmc":36.57,"pf_original":26.58,"pmc_original":36.57},{"id":74,"produto":"Rinosoro Spray XT 3%","apresentacao":"Spray nasal com 50mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças e Adultos","pf":27.68,"pmc":38.09,"pf_original":27.68,"pmc_original":38.09},{"id":75,"produto":"Rinosoro Spray XT Infantil","apresentacao":"Spray nasal com 50mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças","pf":26.58,"pmc":36.57,"pf_original":26.58,"pmc_original":36.57},{"id":76,"produto":"Rinosoro XT Jet","apresentacao":"Frasco com 100mL","posologia":"Aplique a solução nas narinas, conforme a necessidade","idade":"Crianças e Adultos","pf":47.03,"pmc":57.99,"pf_original":47.03,"pmc_original":57.99},{"id":77,"produto":"RIZI","apresentacao":"5,0mg 10 Comprimidos Revestidos","posologia":"1 comprimido ao dia","idade":"A partir de 12 anos","pf":42.28,"pmc":56.72,"pf_original":42.28,"pmc_original":56.72},{"id":78,"produto":"RIZI","apresentacao":"5,0mg 30 Comprimidos Revestidos","posologia":"1 comprimido ao dia","idade":"A partir de 12 anos","pf":126.9,"pmc":170.23,"pf_original":126.9,"pmc_original":170.23},{"id":79,"produto":"RIZI-M","apresentacao":"10mg+5mg Comprimidos 7un","posologia":"1 comprimido ao dia (noite)","idade":"A partir de 18 anos","pf":54.44,"pmc":73.03,"pf_original":54.44,"pmc_original":73.03},{"id":80,"produto":"RIZI-M","apresentacao":"10mg+5mg Comprimidos 14un","posologia":"1 comprimido ao dia (noite)","idade":"A partir de 18 anos","pf":108.91,"pmc":146.1,"pf_original":108.91,"pmc_original":146.1}];
+const ICMS_OPTIONS = [
+  {rate:12,label:"12%",states:"MG (GEN), SP (GEN)"},
+  {rate:17,label:"17%",states:"DF, ES, MT, MS, RS, SC"},
+  {rate:18,label:"18%",states:"AP, MG, SP"},
+  {rate:19,label:"19%",states:"AC, AL, GO, PA, SE"},
+  {rate:19.5,label:"19,5%",states:"PR, RO"},
+  {rate:20,label:"20%",states:"AM, CE, PB, RN, RR, TO"},
+  {rate:20.5,label:"20,5%",states:"BA, PE"},
+  {rate:22,label:"22%",states:"RJ"},
+  {rate:22.5,label:"22,5%",states:"PI"},
+  {rate:23,label:"23%",states:"MA"}
+];
+const THEMES = [
+  {id:"default",label:"Azul",color:"#2563eb"},
+  {id:"laranja",label:"Laranja",color:"#ea580c"},
+  {id:"verde",label:"Verde",color:"#16a34a"},
+  {id:"branco",label:"Branco",color:"#1a1a2e"},
+  {id:"preto",label:"Preto",color:"#eab308"}
+];
+
+let icmsRate=18, discPF=0, discPMC=0, familyFilter="*", searchQuery="", selectedIds=new Set(), currentTheme="default";
+
+function convertIcms(price,rate){if(rate===18)return price;return price*(1-18/100)/(1-rate/100)}
+function moneyBR(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+
+// Date badge
+document.getElementById("dateBadge").textContent = "Atualizado " + new Date().toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"});
+
+// Search
+const searchInput = document.getElementById("searchInput");
+const clearSearch = document.getElementById("clearSearch");
+searchInput.addEventListener("input", e => {
+  searchQuery = e.target.value;
+  clearSearch.style.display = searchQuery ? "block" : "none";
+  render();
+});
+clearSearch.addEventListener("click", () => {
+  searchQuery = "";
+  searchInput.value = "";
+  clearSearch.style.display = "none";
+  render();
+});
+
+// Family filter
+const families = [...new Set(products.map(p => p.produto.split(/\s+/)[0].toUpperCase()))].sort();
+const sel = document.getElementById("familyFilter");
+families.forEach(f => { const o = document.createElement("option"); o.value=f; o.textContent=f; sel.appendChild(o); });
+sel.addEventListener("change", e => { familyFilter=e.target.value; render(); });
+
+// Theme chips
+const themesEl = document.getElementById("themes");
+THEMES.forEach(t => {
+  const btn = document.createElement("button");
+  btn.textContent = t.label;
+  btn.style.background = t.color;
+  btn.className = t.id === currentTheme ? "active" : "";
+  btn.onclick = () => {
+    currentTheme = t.id;
+    document.documentElement.setAttribute("data-theme", t.id === "default" ? "" : t.id);
+    if(t.id === "default") document.documentElement.removeAttribute("data-theme");
+    themesEl.querySelectorAll("button").forEach((b,i) => b.className = THEMES[i].id === currentTheme ? "active" : "");
+  };
+  themesEl.appendChild(btn);
+});
+
+// ICMS grid
+const icmsGrid = document.getElementById("icmsGrid");
+ICMS_OPTIONS.forEach(opt => {
+  const btn = document.createElement("button");
+  btn.className = "icms-btn" + (opt.rate===icmsRate?" active":"");
+  btn.innerHTML = '<span class="rate">'+opt.label+'</span><span class="states">'+opt.states+'</span>';
+  btn.onclick = () => { icmsRate=opt.rate; render(); };
+  icmsGrid.appendChild(btn);
+});
+
+// Discounts
+function buildDiscounts(){
+  document.getElementById("discounts").innerHTML =
+    '<div class="disc-row"><span class="label">% desconto PF:</span><div class="controls">'+
+    '<button onclick="changeDisc(\'PF\',-1)">−</button>'+
+    '<span class="val" id="discPF">'+discPF+'%</span>'+
+    '<button onclick="changeDisc(\'PF\',1)">+</button></div></div>'+
+    '<div class="disc-row"><span class="label">% desconto PMC:</span><div class="controls">'+
+    '<button onclick="changeDisc(\'PMC\',-1)">−</button>'+
+    '<span class="val" id="discPMC">'+discPMC+'%</span>'+
+    '<button onclick="changeDisc(\'PMC\',1)">+</button></div></div>';
+}
+window.changeDisc = (label,dir) => {
+  if(label==="PF") discPF=Math.max(0,Math.min(95,discPF+dir));
+  else discPMC=Math.max(0,Math.min(95,discPMC+dir));
+  buildDiscounts(); render();
+};
+buildDiscounts();
+
+function render(){
+  // ICMS buttons
+  icmsGrid.querySelectorAll(".icms-btn").forEach((btn,i) => {
+    btn.className = "icms-btn" + (ICMS_OPTIONS[i].rate===icmsRate?" active":"");
+  });
+
+  // Filter
+  const q = searchQuery.toLowerCase().trim();
+  const list = products.filter(p => {
+    if(familyFilter!=="*" && !p.produto.toUpperCase().startsWith(familyFilter)) return false;
+    if(q && !p.produto.toLowerCase().includes(q) && !p.apresentacao.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  document.getElementById("counter").textContent = list.length+"/"+products.length+" itens";
+  document.getElementById("empty").style.display = list.length===0?"block":"none";
+
+  const grid = document.getElementById("grid");
+  grid.innerHTML = list.map(p => {
+    const pfAdj=convertIcms(p.pf,icmsRate);
+    const pmcAdj=convertIcms(p.pmc,icmsRate);
+    const pfOrig=convertIcms(p.pf_original,icmsRate);
+    const pmcOrig=convertIcms(p.pmc_original,icmsRate);
+    const pfVal=pfAdj*(1-discPF/100);
+    const pmcVal=pmcAdj*(1-discPMC/100);
+    const selClass=selectedIds.has(p.id)?" selected":"";
+    return '<div class="card'+selClass+'" onclick="toggleSel('+p.id+')">'+
+      '<h3>'+p.produto+'</h3>'+
+      '<p class="apr">'+p.apresentacao+'</p>'+
+      '<div class="tags">'+
+        (p.posologia?'<span class="tag tag-pos">💊 '+p.posologia+'</span>':'')+
+        (p.idade?'<span class="tag tag-age">👤 '+p.idade+'</span>':'')+
+      '</div>'+
+      '<div class="prices">'+
+        '<div class="price-col"><div class="info"><span class="price-label">PF '+icmsRate+'%</span><span class="price-old">'+moneyBR(pfOrig)+'</span></div><span class="price-val">'+moneyBR(pfVal)+'</span></div>'+
+        '<div class="price-div"></div>'+
+        '<div class="price-col"><div class="info"><span class="price-label">PMC '+icmsRate+'%</span><span class="price-old">'+moneyBR(pmcOrig)+'</span></div><span class="price-val">'+moneyBR(pmcVal)+'</span></div>'+
+      '</div></div>';
+  }).join("");
+
+  // Toolbar
+  const tb=document.getElementById("toolbar");
+  let h="";
+  if(selectedIds.size>0){
+    h+='<div class="tb-row"><button class="tb-btn tb-share" onclick="shareWA()">📤 Enviar ('+selectedIds.size+')</button>'+
+       '<button class="tb-btn tb-clear" onclick="selectedIds.clear();render()">❌</button></div>';
+  }
+  h+='<div class="tb-row"><button class="tb-btn" onclick="window.scrollTo({top:0,behavior:\'smooth\'})">Topo</button>'+
+     '<button class="tb-btn" onclick="resetAll()">Redefinir</button></div>';
+  tb.innerHTML=h;
+}
+
+window.toggleSel = id => { selectedIds.has(id)?selectedIds.delete(id):selectedIds.add(id); render(); };
+window.resetAll = () => {
+  discPF=0;discPMC=0;icmsRate=18;familyFilter="*";searchQuery="";selectedIds.clear();
+  sel.value="*";searchInput.value="";clearSearch.style.display="none";
+  currentTheme="default";document.documentElement.removeAttribute("data-theme");
+  themesEl.querySelectorAll("button").forEach((b,i)=>b.className=THEMES[i].id==="default"?"active":"");
+  buildDiscounts();render();
+};
+window.shareWA = () => {
+  const items=products.filter(p=>selectedIds.has(p.id));
+  if(!items.length) return;
+  let msg="*LISTA DE PREÇOS MANTECORP*\n\n";
+  items.forEach(p => {
+    const pmcAdj=convertIcms(p.pmc,icmsRate);
+    const pmcVal=pmcAdj*(1-discPMC/100);
+    msg+="*"+p.produto+"*\n"+p.apresentacao+"\n- PMC: R$ "+pmcVal.toFixed(2).replace(".",",")+  "\n";
+    if(p.posologia) msg+="- Posologia: "+p.posologia+"\n";
+    if(p.idade) msg+="- Idade: "+p.idade+"\n";
+    msg+="-------------------------\n";
+  });
+  msg+="— Mantecorp";
+  window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank");
+};
+
+render();
+</script>
 </body>
 </html>
