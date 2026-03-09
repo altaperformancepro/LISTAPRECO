@@ -2,92 +2,160 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Lista de Preço Mantecorp</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#f0f2f7;--card:#fff;--text:#1a1a2e;--text2:#666;--text3:#999;--border:#e8e8ec;--primary:#2563eb;--primary-light:#e8f0fe;--green:#137333;--green-light:#e6f4ea;--orange:#ea580c;--orange-light:#fff7ed}
-body{background:var(--bg);font-family:'Inter',sans-serif;padding:0;margin:0;color:var(--text);-webkit-font-smoothing:antialiased}
-.app{max-width:1000px;margin:0 auto;padding:12px}
-.bar{height:4px;background:var(--primary)}
-.header{background:var(--card);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.header h1{font-size:18px;font-weight:900}
-.header .sub{font-size:11px;color:var(--text3);margin-top:4px}
-.section-label{font-size:11px;font-weight:800;color:var(--primary);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
-.filter-row{margin-bottom:12px}
+:root{
+  --bg:#f0f2f7;--card:#fff;--text:#1a1a2e;--text2:#666;--text3:#999;
+  --border:#e2e4ea;--primary:#2563eb;--primary-fg:#fff;--primary-light:rgba(37,99,235,.1);
+  --accent:#eef2ff;--muted:#f1f3f9;--muted-fg:#6b7280;
+  --green:#137333;--green-light:#e6f4ea;--shadow-card:0 4px 16px -2px rgba(0,0,0,.12),0 2px 6px -1px rgba(0,0,0,.08);
+  --shadow-hover:0 12px 40px -8px rgba(0,0,0,.22),0 6px 16px -4px rgba(0,0,0,.12);
+  --shadow-selected:0 8px 28px -4px rgba(0,0,0,.18),0 4px 12px -2px rgba(0,0,0,.1);
+}
+[data-theme="laranja"]{--primary:#ea580c;--primary-light:rgba(234,88,12,.1);--accent:#fff7ed}
+[data-theme="verde"]{--primary:#16a34a;--primary-light:rgba(22,163,74,.1);--accent:#f0fdf4}
+[data-theme="branco"]{--primary:#1a1a2e;--primary-light:rgba(26,26,46,.08);--accent:#f5f5f5}
+[data-theme="preto"]{--bg:#d6d6d6;--card:#1a1a1a;--text:#f5f5f5;--text2:#aaa;--text3:#777;--border:#333;--primary:#eab308;--primary-fg:#111;--primary-light:rgba(234,179,8,.12);--accent:#222;--muted:#222;--muted-fg:#888;--shadow-card:0 4px 16px -2px rgba(0,0,0,.3),0 2px 6px -1px rgba(0,0,0,.2);--shadow-hover:0 12px 40px -8px rgba(0,0,0,.5),0 6px 16px -4px rgba(0,0,0,.3);--shadow-selected:0 8px 28px -4px rgba(0,0,0,.4),0 4px 12px -2px rgba(0,0,0,.25)}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* Banner */
+.banner{position:sticky;top:0;z-index:60;background:var(--primary);color:var(--primary-fg);text-align:center;padding:10px 12px;font-size:14px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+
+/* Header */
+.top-bar{height:4px;background:var(--primary)}
+.header{background:var(--card);border-bottom:1px solid var(--border)}
+.header-inner{max-width:1000px;margin:0 auto;padding:12px 12px 16px}
+.brand{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between}
+.brand h1{font-size:16px;font-weight:900;letter-spacing:-.3px;display:flex;align-items:center;gap:6px}
+.brand h1 svg{width:20px;height:20px}
+.brand .badge{font-size:11px;font-weight:600;background:var(--primary);color:var(--primary-fg);border-radius:999px;padding:4px 10px}
+.subtitle{font-size:11px;color:var(--text3);margin-top:4px}
+.counter{font-family:monospace;font-size:11px;background:var(--accent);border:1px solid var(--border);border-radius:4px;padding:1px 6px}
+
+/* Search */
+.search-wrap{position:relative;margin-top:10px}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted-fg);opacity:.6}
+.search-wrap input{width:100%;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);padding:0 56px 0 38px;font-size:14px;color:var(--text);outline:none;transition:border .15s,box-shadow .15s}
+.search-wrap input:focus{border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-light)}
+.search-wrap .clear-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;font-size:12px;color:var(--muted-fg);cursor:pointer;padding:4px 8px;border-radius:6px}
+.search-wrap .clear-btn:hover{background:var(--accent);color:var(--text)}
+
+/* Filter select */
+.filter-row{margin-top:10px}
 .filter-row select{width:100%;height:40px;border-radius:12px;border:1px solid var(--border);padding:0 12px;font-size:14px;font-weight:500;background:var(--card);color:var(--text);cursor:pointer}
-.themes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.themes button{border:none;border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;transition:transform .1s}
+
+/* Theme chips */
+.section-label{font-size:11px;font-weight:800;color:var(--primary);letter-spacing:.5px;text-transform:uppercase;margin:10px 0 6px}
+.themes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.themes button{border:2px solid transparent;border-radius:999px;padding:6px 16px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;transition:transform .1s,box-shadow .15s}
 .themes button:active{transform:translateY(1px)}
-.themes button.active{box-shadow:0 0 0 3px rgba(37,99,235,.4)}
+.themes button.active{box-shadow:0 0 0 3px var(--primary-light)}
+
+/* ICMS */
 .icms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
 @media(min-width:640px){.icms-grid{grid-template-columns:repeat(5,1fr)}}
 .icms-btn{display:flex;flex-direction:column;align-items:flex-start;padding:8px 10px;border-radius:12px;border:1px solid var(--border);background:var(--card);cursor:pointer;transition:all .15s}
-.icms-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.icms-btn.active{border-color:var(--primary);background:rgba(37,99,235,.08)}
+.icms-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.icms-btn.active{border-color:var(--primary);background:var(--primary-light)}
 .icms-btn .rate{font-size:13px;font-weight:900}
 .icms-btn.active .rate{color:var(--primary)}
 .icms-btn .states{font-size:9px;color:var(--primary);opacity:.7;line-height:1.2}
-.disc-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;border:1px solid var(--border);background:var(--card);margin-bottom:8px}
-.disc-row .label{font-size:11px;font-weight:800;color:var(--primary)}
+
+/* Discount bars */
+.disc-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
+@media(min-width:640px){.disc-grid{grid-template-columns:1fr 1fr}}
+.disc-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;border:1px solid var(--border);background:var(--accent)}
+.disc-row .label{font-size:11px;font-weight:800;color:var(--primary);letter-spacing:.5px}
 .disc-row .controls{margin-left:auto;display:flex;align-items:center;gap:6px}
-.disc-row button{width:32px;height:32px;border-radius:8px;border:1px solid rgba(37,99,235,.3);background:var(--card);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.disc-row button{width:32px;height:32px;border-radius:8px;border:1px solid color-mix(in srgb,var(--primary) 30%,transparent);background:var(--card);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .1s}
+.disc-row button:hover{box-shadow:0 0 0 3px var(--primary-light)}
 .disc-row button:active{transform:translateY(1px)}
 .disc-row .val{min-width:48px;text-align:center;font-weight:900;font-size:14px}
-.grid{display:grid;grid-template-columns:1fr;gap:10px}
+
+/* Product grid */
+.grid{display:grid;grid-template-columns:1fr;gap:12px;padding:12px 0 100px}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
-.card{background:var(--card);border-radius:14px;padding:12px;border:1px solid var(--border);cursor:pointer;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;gap:8px;box-shadow:0 4px 16px -2px rgba(0,0,0,.12),0 2px 6px -1px rgba(0,0,0,.08)}
-.card:hover{transform:translateY(-4px);box-shadow:0 12px 36px -6px rgba(0,0,0,.2),0 6px 16px -4px rgba(0,0,0,.12)}
-.card.selected{outline:3px solid var(--primary);outline-offset:2px;background:rgba(37,99,235,.05);box-shadow:0 6px 24px -4px rgba(0,0,0,.15),0 4px 10px -2px rgba(0,0,0,.1)}
-.card h3{font-size:14px;font-weight:800}
-.card .apr{font-size:12px;color:var(--text2)}
+@media(min-width:1280px){.grid{grid-template-columns:repeat(4,1fr)}}
+
+/* Cards with 3D depth */
+.card{background:var(--card);border-radius:16px;padding:12px;border:1px solid var(--border);cursor:pointer;transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-card);perspective:800px}
+.card:hover{transform:translateY(-4px) scale(1.01);box-shadow:var(--shadow-hover)}
+.card.selected{outline:3px solid var(--primary);outline-offset:2px;background:var(--primary-light);box-shadow:var(--shadow-selected);transform:translateY(-2px)}
+.card h3{font-size:14px;font-weight:800;letter-spacing:-.2px}
+.card .apr{font-size:12px;color:var(--text2);line-height:1.4}
 .tags{display:flex;flex-wrap:wrap;gap:4px}
-.tag{font-size:10px;padding:2px 6px;border-radius:6px;font-weight:600}
+.tag{font-size:10px;padding:3px 8px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;gap:3px}
 .tag-pos{background:var(--primary-light);color:var(--primary)}
 .tag-age{background:var(--green-light);color:var(--green)}
-.prices{display:grid;grid-template-columns:1fr 1px 1fr;margin-top:auto;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.prices{display:grid;grid-template-columns:1fr 1px 1fr;margin-top:auto;border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .price-col{display:flex;align-items:center;justify-content:space-between;padding:8px;gap:4px}
 .price-col .info{display:flex;flex-direction:column;gap:2px}
-.price-label{font-size:10px;font-weight:800;color:rgba(37,99,235,.6);text-transform:uppercase;letter-spacing:.5px}
+.price-label{font-size:10px;font-weight:800;color:color-mix(in srgb,var(--primary) 60%,transparent);text-transform:uppercase;letter-spacing:.5px}
 .price-old{font-size:10px;color:var(--text3);text-decoration:line-through}
 .price-val{font-size:13px;font-weight:900}
 .price-div{background:var(--border)}
-.toolbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:8px 12px;display:flex;flex-direction:column;gap:8px;z-index:50}
-.toolbar .row{display:flex;gap:8px}
-.toolbar button{flex:1;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);font-size:12px;font-weight:500;cursor:pointer}
-.toolbar button:active{transform:translateY(1px)}
-.toolbar .share{background:var(--primary);color:#fff;border:none;font-weight:700}
-.toolbar .clear{flex:none;width:40px;background:#eee;border:none}
-.counter{font-size:11px;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-family:monospace;color:var(--text3)}
+.empty{text-align:center;color:var(--muted-fg);padding:60px 20px;font-size:14px}
+
+/* Bottom toolbar */
+.toolbar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:color-mix(in srgb,var(--card) 95%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid color-mix(in srgb,var(--primary) 20%,transparent);padding:8px 12px}
+@media(min-width:640px){.toolbar{left:50%;right:auto;transform:translateX(-50%);bottom:12px;width:auto;min-width:400px;max-width:600px;border-radius:16px;border:1px solid color-mix(in srgb,var(--primary) 30%,transparent);box-shadow:0 8px 30px rgba(0,0,0,.15)}}
+.toolbar-inner{display:flex;flex-direction:column;gap:8px}
+.tb-row{display:flex;gap:8px}
+.tb-btn{flex:1;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--accent);font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--text);transition:transform .1s}
+.tb-btn:active{transform:translateY(1px)}
+.tb-share{background:var(--primary)!important;color:var(--primary-fg)!important;border:none!important;font-weight:700!important;font-size:13px!important}
+.tb-clear{flex:none!important;width:40px!important;background:var(--muted)!important;border:none!important;color:var(--muted-fg)!important}
+
+/* Scrollbar */
+.scrollbar-hide::-webkit-scrollbar{display:none}
+.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
 </style>
 </head>
 <body>
-<div class="bar"></div>
-<div class="app">
-  <div class="header">
-    <h1>📋 LISTA DE PREÇO MANTECORP</h1>
-    <p class="sub">Catálogo otimizado para mobile · filtros rápidos · <span class="counter" id="counter"></span></p>
+<div class="banner">💊 Selecione os produtos que deseja compartilhar 👇</div>
+<div class="top-bar"></div>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <h1>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6" stroke-linecap="round"/></svg>
+        LISTA DE PREÇO MANTECORP
+      </h1>
+      <span class="badge" id="dateBadge"></span>
+    </div>
+    <p class="subtitle">Catálogo otimizado para mobile · filtros rápidos · <span class="counter" id="counter"></span></p>
+
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="searchInput" placeholder="Buscar por produto ou apresentação..." autocomplete="off">
+      <button class="clear-btn" id="clearSearch" style="display:none">Limpar</button>
+    </div>
+
+    <div class="filter-row">
+      <select id="familyFilter"><option value="*">Todos</option></select>
+    </div>
+
+    <p class="section-label">🎨 TEMA</p>
+    <div class="themes" id="themes"></div>
+
+    <p class="section-label">📍 ICMS POR ESTADO</p>
+    <div class="icms-grid" id="icmsGrid"></div>
+
+    <div class="disc-grid" id="discounts"></div>
   </div>
+</header>
 
-  <div class="filter-row">
-    <select id="familyFilter"><option value="*">Todos</option></select>
-  </div>
-
-  <div class="themes" id="themes"></div>
-
-  <p class="section-label">📍 ICMS POR ESTADO</p>
-  <div class="icms-grid" id="icmsGrid"></div>
-
-  <div id="discounts"></div>
-
+<main style="max-width:1000px;margin:0 auto;padding:0 12px">
   <div class="grid" id="grid"></div>
-</div>
+  <p class="empty" id="empty" style="display:none">Nenhum item encontrado para sua busca/filtragem.</p>
+</main>
 
-<div class="toolbar" id="toolbar">
-  <button onclick="window.scrollTo({top:0,behavior:'smooth'})">Topo</button>
-  <button onclick="resetAll()">Redefinir</button>
+<div class="toolbar">
+  <div class="toolbar-inner" id="toolbar"></div>
 </div>
 
 <script>
@@ -104,110 +172,162 @@ const ICMS_OPTIONS = [
   {rate:22.5,label:"22,5%",states:"PI"},
   {rate:23,label:"23%",states:"MA"}
 ];
-let icmsRate = 18, discPF = 0, discPMC = 0, familyFilter = "*", selectedIds = new Set();
+const THEMES = [
+  {id:"default",label:"Azul",color:"#2563eb"},
+  {id:"laranja",label:"Laranja",color:"#ea580c"},
+  {id:"verde",label:"Verde",color:"#16a34a"},
+  {id:"branco",label:"Branco",color:"#1a1a2e"},
+  {id:"preto",label:"Preto",color:"#eab308"}
+];
 
-function convertIcms(price, rate) {
-  if (rate === 18) return price;
-  return price * (1 - 18/100) / (1 - rate/100);
-}
-function moneyBR(n) { return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}) }
+let icmsRate=18, discPF=0, discPMC=0, familyFilter="*", searchQuery="", selectedIds=new Set(), currentTheme="default";
 
-// Build family filter
+function convertIcms(price,rate){if(rate===18)return price;return price*(1-18/100)/(1-rate/100)}
+function moneyBR(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+
+// Date badge
+document.getElementById("dateBadge").textContent = "Atualizado " + new Date().toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"});
+
+// Search
+const searchInput = document.getElementById("searchInput");
+const clearSearch = document.getElementById("clearSearch");
+searchInput.addEventListener("input", e => {
+  searchQuery = e.target.value;
+  clearSearch.style.display = searchQuery ? "block" : "none";
+  render();
+});
+clearSearch.addEventListener("click", () => {
+  searchQuery = "";
+  searchInput.value = "";
+  clearSearch.style.display = "none";
+  render();
+});
+
+// Family filter
 const families = [...new Set(products.map(p => p.produto.split(/\s+/)[0].toUpperCase()))].sort();
 const sel = document.getElementById("familyFilter");
-families.forEach(f => { const o = document.createElement("option"); o.value = f; o.textContent = f; sel.appendChild(o); });
-sel.addEventListener("change", e => { familyFilter = e.target.value; render(); });
+families.forEach(f => { const o = document.createElement("option"); o.value=f; o.textContent=f; sel.appendChild(o); });
+sel.addEventListener("change", e => { familyFilter=e.target.value; render(); });
 
-// Build ICMS grid
+// Theme chips
+const themesEl = document.getElementById("themes");
+THEMES.forEach(t => {
+  const btn = document.createElement("button");
+  btn.textContent = t.label;
+  btn.style.background = t.color;
+  btn.className = t.id === currentTheme ? "active" : "";
+  btn.onclick = () => {
+    currentTheme = t.id;
+    document.documentElement.setAttribute("data-theme", t.id === "default" ? "" : t.id);
+    if(t.id === "default") document.documentElement.removeAttribute("data-theme");
+    themesEl.querySelectorAll("button").forEach((b,i) => b.className = THEMES[i].id === currentTheme ? "active" : "");
+  };
+  themesEl.appendChild(btn);
+});
+
+// ICMS grid
 const icmsGrid = document.getElementById("icmsGrid");
 ICMS_OPTIONS.forEach(opt => {
   const btn = document.createElement("button");
-  btn.className = "icms-btn" + (opt.rate === icmsRate ? " active" : "");
-  btn.innerHTML = '<span class="rate">' + opt.label + '</span><span class="states">' + opt.states + '</span>';
-  btn.onclick = () => { icmsRate = opt.rate; render(); };
+  btn.className = "icms-btn" + (opt.rate===icmsRate?" active":"");
+  btn.innerHTML = '<span class="rate">'+opt.label+'</span><span class="states">'+opt.states+'</span>';
+  btn.onclick = () => { icmsRate=opt.rate; render(); };
   icmsGrid.appendChild(btn);
 });
 
-// Build discounts
-function buildDiscounts() {
-  const c = document.getElementById("discounts");
-  c.innerHTML = ["PF","PMC"].map(label => 
-    '<div class="disc-row"><span class="label">% desconto ' + label + ':</span><div class="controls">' +
-    '<button onclick="changeDisc(\'' + label + '\',-1)">−</button>' +
-    '<span class="val" id="disc' + label + '">' + (label==="PF"?discPF:discPMC) + '%</span>' +
-    '<button onclick="changeDisc(\'' + label + '\',1)">+</button></div></div>'
-  ).join("");
+// Discounts
+function buildDiscounts(){
+  document.getElementById("discounts").innerHTML =
+    '<div class="disc-row"><span class="label">% desconto PF:</span><div class="controls">'+
+    '<button onclick="changeDisc(\'PF\',-1)">−</button>'+
+    '<span class="val" id="discPF">'+discPF+'%</span>'+
+    '<button onclick="changeDisc(\'PF\',1)">+</button></div></div>'+
+    '<div class="disc-row"><span class="label">% desconto PMC:</span><div class="controls">'+
+    '<button onclick="changeDisc(\'PMC\',-1)">−</button>'+
+    '<span class="val" id="discPMC">'+discPMC+'%</span>'+
+    '<button onclick="changeDisc(\'PMC\',1)">+</button></div></div>';
 }
-window.changeDisc = (label, dir) => {
-  if (label==="PF") discPF = Math.max(0, Math.min(95, discPF+dir));
-  else discPMC = Math.max(0, Math.min(95, discPMC+dir));
+window.changeDisc = (label,dir) => {
+  if(label==="PF") discPF=Math.max(0,Math.min(95,discPF+dir));
+  else discPMC=Math.max(0,Math.min(95,discPMC+dir));
   buildDiscounts(); render();
 };
 buildDiscounts();
 
-function render() {
-  const q = familyFilter;
+function render(){
+  // ICMS buttons
+  icmsGrid.querySelectorAll(".icms-btn").forEach((btn,i) => {
+    btn.className = "icms-btn" + (ICMS_OPTIONS[i].rate===icmsRate?" active":"");
+  });
+
+  // Filter
+  const q = searchQuery.toLowerCase().trim();
   const list = products.filter(p => {
-    if (q !== "*" && !p.produto.toUpperCase().startsWith(q)) return false;
+    if(familyFilter!=="*" && !p.produto.toUpperCase().startsWith(familyFilter)) return false;
+    if(q && !p.produto.toLowerCase().includes(q) && !p.apresentacao.toLowerCase().includes(q)) return false;
     return true;
   });
-  document.getElementById("counter").textContent = list.length + "/" + products.length + " itens";
 
-  // ICMS buttons
-  icmsGrid.querySelectorAll(".icms-btn").forEach((btn, i) => {
-    btn.className = "icms-btn" + (ICMS_OPTIONS[i].rate === icmsRate ? " active" : "");
-  });
+  document.getElementById("counter").textContent = list.length+"/"+products.length+" itens";
+  document.getElementById("empty").style.display = list.length===0?"block":"none";
 
   const grid = document.getElementById("grid");
   grid.innerHTML = list.map(p => {
-    const pfAdj = convertIcms(p.pf, icmsRate);
-    const pmcAdj = convertIcms(p.pmc, icmsRate);
-    const pfOrig = convertIcms(p.pf_original, icmsRate);
-    const pmcOrig = convertIcms(p.pmc_original, icmsRate);
-    const pfVal = pfAdj * (1 - discPF/100);
-    const pmcVal = pmcAdj * (1 - discPMC/100);
-    const sel = selectedIds.has(p.id) ? " selected" : "";
-    return '<div class="card' + sel + '" onclick="toggleSel(' + p.id + ')">' +
-      '<h3>' + p.produto + '</h3>' +
-      '<p class="apr">' + p.apresentacao + '</p>' +
-      '<div class="tags">' +
-        (p.posologia ? '<span class="tag tag-pos">💊 ' + p.posologia + '</span>' : '') +
-        (p.idade ? '<span class="tag tag-age">👤 ' + p.idade + '</span>' : '') +
-      '</div>' +
-      '<div class="prices">' +
-        '<div class="price-col"><div class="info"><span class="price-label">PF ' + icmsRate + '%</span><span class="price-old">' + moneyBR(pfOrig) + '</span></div><span class="price-val">' + moneyBR(pfVal) + '</span></div>' +
-        '<div class="price-div"></div>' +
-        '<div class="price-col"><div class="info"><span class="price-label">PMC ' + icmsRate + '%</span><span class="price-old">' + moneyBR(pmcOrig) + '</span></div><span class="price-val">' + moneyBR(pmcVal) + '</span></div>' +
+    const pfAdj=convertIcms(p.pf,icmsRate);
+    const pmcAdj=convertIcms(p.pmc,icmsRate);
+    const pfOrig=convertIcms(p.pf_original,icmsRate);
+    const pmcOrig=convertIcms(p.pmc_original,icmsRate);
+    const pfVal=pfAdj*(1-discPF/100);
+    const pmcVal=pmcAdj*(1-discPMC/100);
+    const selClass=selectedIds.has(p.id)?" selected":"";
+    return '<div class="card'+selClass+'" onclick="toggleSel('+p.id+')">'+
+      '<h3>'+p.produto+'</h3>'+
+      '<p class="apr">'+p.apresentacao+'</p>'+
+      '<div class="tags">'+
+        (p.posologia?'<span class="tag tag-pos">💊 '+p.posologia+'</span>':'')+
+        (p.idade?'<span class="tag tag-age">👤 '+p.idade+'</span>':'')+
+      '</div>'+
+      '<div class="prices">'+
+        '<div class="price-col"><div class="info"><span class="price-label">PF '+icmsRate+'%</span><span class="price-old">'+moneyBR(pfOrig)+'</span></div><span class="price-val">'+moneyBR(pfVal)+'</span></div>'+
+        '<div class="price-div"></div>'+
+        '<div class="price-col"><div class="info"><span class="price-label">PMC '+icmsRate+'%</span><span class="price-old">'+moneyBR(pmcOrig)+'</span></div><span class="price-val">'+moneyBR(pmcVal)+'</span></div>'+
       '</div></div>';
   }).join("");
 
   // Toolbar
-  const tb = document.getElementById("toolbar");
-  let tbHTML = "";
-  if (selectedIds.size > 0) {
-    tbHTML += '<div class="row"><button class="share" onclick="shareWA()">📤 Enviar (' + selectedIds.size + ')</button>' +
-      '<button class="clear" onclick="selectedIds.clear();render()">❌</button></div>';
+  const tb=document.getElementById("toolbar");
+  let h="";
+  if(selectedIds.size>0){
+    h+='<div class="tb-row"><button class="tb-btn tb-share" onclick="shareWA()">📤 Enviar ('+selectedIds.size+')</button>'+
+       '<button class="tb-btn tb-clear" onclick="selectedIds.clear();render()">❌</button></div>';
   }
-  tbHTML += '<div class="row"><button onclick="window.scrollTo({top:0,behavior:\'smooth\'})">Topo</button>' +
-    '<button onclick="resetAll()">Redefinir</button></div>';
-  tb.innerHTML = tbHTML;
+  h+='<div class="tb-row"><button class="tb-btn" onclick="window.scrollTo({top:0,behavior:\'smooth\'})">Topo</button>'+
+     '<button class="tb-btn" onclick="resetAll()">Redefinir</button></div>';
+  tb.innerHTML=h;
 }
 
-window.toggleSel = id => { selectedIds.has(id) ? selectedIds.delete(id) : selectedIds.add(id); render(); };
-window.resetAll = () => { discPF=0; discPMC=0; icmsRate=18; familyFilter="*"; selectedIds.clear(); sel.value="*"; buildDiscounts(); render(); };
+window.toggleSel = id => { selectedIds.has(id)?selectedIds.delete(id):selectedIds.add(id); render(); };
+window.resetAll = () => {
+  discPF=0;discPMC=0;icmsRate=18;familyFilter="*";searchQuery="";selectedIds.clear();
+  sel.value="*";searchInput.value="";clearSearch.style.display="none";
+  currentTheme="default";document.documentElement.removeAttribute("data-theme");
+  themesEl.querySelectorAll("button").forEach((b,i)=>b.className=THEMES[i].id==="default"?"active":"");
+  buildDiscounts();render();
+};
 window.shareWA = () => {
-  const items = products.filter(p => selectedIds.has(p.id));
-  let msg = "*LISTA DE PREÇOS MANTECORP*\n\n";
+  const items=products.filter(p=>selectedIds.has(p.id));
+  if(!items.length) return;
+  let msg="*LISTA DE PREÇOS MANTECORP*\n\n";
   items.forEach(p => {
-    const pmcAdj = convertIcms(p.pmc, icmsRate);
-    const pmcVal = pmcAdj * (1 - discPMC/100);
-    msg += "*" + p.produto + "*\n" + p.apresentacao + "\n- PMC (" + icmsRate + "%): R$ " + pmcVal.toFixed(2).replace(".",",") + "\n";
-    if (p.posologia) msg += "- Posologia: " + p.posologia + "\n";
-    if (p.idade) msg += "- Idade: " + p.idade + "\n";
-    msg += "-------------------------\n";
+    const pmcAdj=convertIcms(p.pmc,icmsRate);
+    const pmcVal=pmcAdj*(1-discPMC/100);
+    msg+="*"+p.produto+"*\n"+p.apresentacao+"\n- PMC ("+icmsRate+"%): R$ "+pmcVal.toFixed(2).replace(".",",")+  "\n";
+    if(p.posologia) msg+="- Posologia: "+p.posologia+"\n";
+    if(p.idade) msg+="- Idade: "+p.idade+"\n";
+    msg+="-------------------------\n";
   });
-  msg += "— Mantecorp";
-  window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+  msg+="— Mantecorp";
+  window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank");
 };
 
 render();
