@@ -321,7 +321,7 @@ window.shareWA = () => {
   items.forEach(p => {
     const pmcAdj=convertIcms(p.pmc,icmsRate);
     const pmcVal=pmcAdj*(1-discPMC/100);
-    msg+="*"+p.produto+"*\n"+p.apresentacao+"\n- PMC ("+icmsRate+"%): R$ "+pmcVal.toFixed(2).replace(".",",")+  "\n";
+    msg+="*"+p.produto+"*\n"+p.apresentacao+"\n- PMC: R$ "+pmcVal.toFixed(2).replace(".",",")+  "\n";
     if(p.posologia) msg+="- Posologia: "+p.posologia+"\n";
     if(p.idade) msg+="- Idade: "+p.idade+"\n";
     msg+="-------------------------\n";
