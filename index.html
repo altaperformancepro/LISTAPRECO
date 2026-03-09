@@ -38,9 +38,9 @@ body{background:var(--bg);font-family:'Inter',sans-serif;padding:0;margin:0;colo
 .grid{display:grid;grid-template-columns:1fr;gap:10px}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
-.card{background:var(--card);border-radius:14px;padding:12px;border:1px solid var(--border);cursor:pointer;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;gap:8px}
-.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
-.card.selected{outline:3px solid var(--primary);outline-offset:2px;background:rgba(37,99,235,.03)}
+.card{background:var(--card);border-radius:14px;padding:12px;border:1px solid var(--border);cursor:pointer;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;gap:8px;box-shadow:0 4px 16px -2px rgba(0,0,0,.12),0 2px 6px -1px rgba(0,0,0,.08)}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 36px -6px rgba(0,0,0,.2),0 6px 16px -4px rgba(0,0,0,.12)}
+.card.selected{outline:3px solid var(--primary);outline-offset:2px;background:rgba(37,99,235,.05);box-shadow:0 6px 24px -4px rgba(0,0,0,.15),0 4px 10px -2px rgba(0,0,0,.1)}
 .card h3{font-size:14px;font-weight:800}
 .card .apr{font-size:12px;color:var(--text2)}
 .tags{display:flex;flex-wrap:wrap;gap:4px}
@@ -54,7 +54,8 @@ body{background:var(--bg);font-family:'Inter',sans-serif;padding:0;margin:0;colo
 .price-old{font-size:10px;color:var(--text3);text-decoration:line-through}
 .price-val{font-size:13px;font-weight:900}
 .price-div{background:var(--border)}
-.toolbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:8px 12px;display:flex;gap:8px;z-index:50}
+.toolbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:8px 12px;display:flex;flex-direction:column;gap:8px;z-index:50}
+.toolbar .row{display:flex;gap:8px}
 .toolbar button{flex:1;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);font-size:12px;font-weight:500;cursor:pointer}
 .toolbar button:active{transform:translateY(1px)}
 .toolbar .share{background:var(--primary);color:#fff;border:none;font-weight:700}
@@ -182,15 +183,14 @@ function render() {
 
   // Toolbar
   const tb = document.getElementById("toolbar");
+  let tbHTML = "";
   if (selectedIds.size > 0) {
-    tb.innerHTML = '<button onclick="window.scrollTo({top:0,behavior:\'smooth\'})">Topo</button>' +
-      '<button onclick="resetAll()">Redefinir</button>' +
-      '<button class="share" onclick="shareWA()">📤 Enviar (' + selectedIds.size + ')</button>' +
-      '<button class="clear" onclick="selectedIds.clear();render()">❌</button>';
-  } else {
-    tb.innerHTML = '<button onclick="window.scrollTo({top:0,behavior:\'smooth\'})">Topo</button>' +
-      '<button onclick="resetAll()">Redefinir</button>';
+    tbHTML += '<div class="row"><button class="share" onclick="shareWA()">📤 Enviar (' + selectedIds.size + ')</button>' +
+      '<button class="clear" onclick="selectedIds.clear();render()">❌</button></div>';
   }
+  tbHTML += '<div class="row"><button onclick="window.scrollTo({top:0,behavior:\'smooth\'})">Topo</button>' +
+    '<button onclick="resetAll()">Redefinir</button></div>';
+  tb.innerHTML = tbHTML;
 }
 
 window.toggleSel = id => { selectedIds.has(id) ? selectedIds.delete(id) : selectedIds.add(id); render(); };
